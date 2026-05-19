@@ -56,6 +56,7 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		D5651C4D2FBCE79E00400C59 /* LeaguesDetails */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = LeaguesDetails; sourceTree = "<group>"; };
 		D5E648C42FBCC49E00C612B4 /* Font */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Font; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
@@ -107,6 +108,7 @@
 		5A9543282FBC874B00571374 /* SportsZone */ = {
 			isa = PBXGroup;
 			children = (
+				D5651C4D2FBCE79E00400C59 /* LeaguesDetails */,
 				D5E604E72FBCDFDC0019900A /* Colors */,
 				5A9543292FBC874B00571374 /* AppDelegate.swift */,
 				5A95432B2FBC874B00571374 /* SceneDelegate.swift */,
@@ -162,6 +164,7 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
+				D5651C4D2FBCE79E00400C59 /* LeaguesDetails */,
 				D5E648C42FBCC49E00C612B4 /* Font */,
 			);
 			name = SportsZone;
