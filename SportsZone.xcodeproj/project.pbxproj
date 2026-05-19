@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 70;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -52,6 +52,11 @@
 		5A95434D2FBC874E00571374 /* SportsZoneUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SportsZoneUITests.swift; sourceTree = "<group>"; };
 		5A95434F2FBC874E00571374 /* SportsZoneUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SportsZoneUITestsLaunchTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		D5E648BF2FBCC49E00C612B4 /* Colors */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Colors; sourceTree = "<group>"; };
+		D5E648C42FBCC49E00C612B4 /* Font */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Font; sourceTree = "<group>"; };
+/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		5A9543232FBC874B00571374 /* Frameworks */ = {
@@ -109,6 +114,8 @@
 				5A9543372FBC874E00571374 /* LaunchScreen.storyboard */,
 				5A95433A2FBC874E00571374 /* Info.plist */,
 				5A9543322FBC874B00571374 /* SportsZone.xcdatamodeld */,
+				D5E648BF2FBCC49E00C612B4 /* Colors */,
+				D5E648C42FBCC49E00C612B4 /* Font */,
 			);
 			path = SportsZone;
 			sourceTree = "<group>";
@@ -144,6 +151,10 @@
 			buildRules = (
 			);
 			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				D5E648BF2FBCC49E00C612B4 /* Colors */,
+				D5E648C42FBCC49E00C612B4 /* Font */,
 			);
 			name = SportsZone;
 			productName = SportsZone;
