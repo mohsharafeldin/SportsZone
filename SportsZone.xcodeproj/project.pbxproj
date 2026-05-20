@@ -14,6 +14,11 @@
 		5A9543442FBC874E00571374 /* SportsZoneTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A9543432FBC874E00571374 /* SportsZoneTests.swift */; };
 		5A95434E2FBC874E00571374 /* SportsZoneUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A95434D2FBC874E00571374 /* SportsZoneUITests.swift */; };
 		5A9543502FBC874E00571374 /* SportsZoneUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A95434F2FBC874E00571374 /* SportsZoneUITestsLaunchTests.swift */; };
+		5AD06DA12FBE2BEF004674CD /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 5AD06DA02FBE2BEF004674CD /* SDWebImage */; };
+		5AD06DA32FBE2BEF004674CD /* SDWebImageMapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 5AD06DA22FBE2BEF004674CD /* SDWebImageMapKit */; };
+		5AD06DA62FBE2C60004674CD /* Reachability in Frameworks */ = {isa = PBXBuildFile; productRef = 5AD06DA52FBE2C60004674CD /* Reachability */; };
+		5AD06DA92FBE2E8F004674CD /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 5AD06DA82FBE2E8F004674CD /* Alamofire */; };
+		5AD06DAC2FBE2FD2004674CD /* ShimmerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 5AD06DAB2FBE2FD2004674CD /* ShimmerSwift */; };
 		D57124262FBE1E6B0091FB75 /* EventModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57124232FBE1E6B0091FB75 /* EventModel.swift */; };
 		D57124272FBE1E6B0091FB75 /* TeamModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57124242FBE1E6B0091FB75 /* TeamModel.swift */; };
 		D57124302FBE1E710091FB75 /* AppColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57124282FBE1E710091FB75 /* AppColors.swift */; };
@@ -82,6 +87,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5AD06DA32FBE2BEF004674CD /* SDWebImageMapKit in Frameworks */,
+				5AD06DA92FBE2E8F004674CD /* Alamofire in Frameworks */,
+				5AD06DAC2FBE2FD2004674CD /* ShimmerSwift in Frameworks */,
+				5AD06DA62FBE2C60004674CD /* Reachability in Frameworks */,
+				5AD06DA12FBE2BEF004674CD /* SDWebImage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -262,6 +272,13 @@
 			dependencies = (
 			);
 			name = SportsZone;
+			packageProductDependencies = (
+				5AD06DA02FBE2BEF004674CD /* SDWebImage */,
+				5AD06DA22FBE2BEF004674CD /* SDWebImageMapKit */,
+				5AD06DA52FBE2C60004674CD /* Reachability */,
+				5AD06DA82FBE2E8F004674CD /* Alamofire */,
+				5AD06DAB2FBE2FD2004674CD /* ShimmerSwift */,
+			);
 			productName = SportsZone;
 			productReference = 5A9543262FBC874B00571374 /* SportsZone.app */;
 			productType = "com.apple.product-type.application";
@@ -334,6 +351,12 @@
 				Base,
 			);
 			mainGroup = 5A95431D2FBC874B00571374;
+			packageReferences = (
+				5AD06D9F2FBE2BEF004674CD /* XCRemoteSwiftPackageReference "sdwebimage" */,
+				5AD06DA42FBE2C60004674CD /* XCRemoteSwiftPackageReference "Reachability" */,
+				5AD06DA72FBE2E8F004674CD /* XCRemoteSwiftPackageReference "Alamofire" */,
+				5AD06DAA2FBE2FD2004674CD /* XCRemoteSwiftPackageReference "ShimmerSwift" */,
+			);
 			productRefGroup = 5A9543272FBC874B00571374 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -505,7 +528,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = "";
 			};
 			name = Debug;
 		};
@@ -559,7 +582,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = "";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -730,6 +753,69 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		5AD06D9F2FBE2BEF004674CD /* XCRemoteSwiftPackageReference "sdwebimage" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/sdwebimage/sdwebimage";
+			requirement = {
+				kind = exactVersion;
+				version = 5.9.5;
+			};
+		};
+		5AD06DA42FBE2C60004674CD /* XCRemoteSwiftPackageReference "Reachability" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ashleymills/Reachability.swift";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+		5AD06DA72FBE2E8F004674CD /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				kind = exactVersion;
+				version = 5.6.4;
+			};
+		};
+		5AD06DAA2FBE2FD2004674CD /* XCRemoteSwiftPackageReference "ShimmerSwift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/BeauNouvelle/ShimmerSwift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		5AD06DA02FBE2BEF004674CD /* SDWebImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5AD06D9F2FBE2BEF004674CD /* XCRemoteSwiftPackageReference "sdwebimage" */;
+			productName = SDWebImage;
+		};
+		5AD06DA22FBE2BEF004674CD /* SDWebImageMapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5AD06D9F2FBE2BEF004674CD /* XCRemoteSwiftPackageReference "sdwebimage" */;
+			productName = SDWebImageMapKit;
+		};
+		5AD06DA52FBE2C60004674CD /* Reachability */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5AD06DA42FBE2C60004674CD /* XCRemoteSwiftPackageReference "Reachability" */;
+			productName = Reachability;
+		};
+		5AD06DA82FBE2E8F004674CD /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5AD06DA72FBE2E8F004674CD /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+		5AD06DAB2FBE2FD2004674CD /* ShimmerSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5AD06DAA2FBE2FD2004674CD /* XCRemoteSwiftPackageReference "ShimmerSwift" */;
+			productName = ShimmerSwift;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		5A9543322FBC874B00571374 /* SportsZone.xcdatamodeld */ = {
