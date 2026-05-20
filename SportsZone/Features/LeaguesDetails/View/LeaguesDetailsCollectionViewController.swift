@@ -19,12 +19,12 @@ class LeaguesDetailsCollectionViewController: UICollectionViewController {
         collectionView.register(
             UINib(nibName: "HeaderView", bundle: nil),
             forSupplementaryViewOfKind:UICollectionView.elementKindSectionHeader,
-            withReuseIdentifier: headerIdentifire,
+            withReuseIdentifier: headerIdentifire
         )
         
         collectionView.register(
             UINib(nibName: "EventCell", bundle: nil),
-            forCellWithReuseIdentifier: eventsIdentifier,
+            forCellWithReuseIdentifier: eventsIdentifier
         )
         
         let layout = UICollectionViewCompositionalLayout {index, environment in
@@ -55,7 +55,7 @@ class LeaguesDetailsCollectionViewController: UICollectionViewController {
         case 0:
             let cell = collectionView.dequeueReusableCell(
                 withReuseIdentifier: eventsIdentifier,
-                for: indexPath,
+                for: indexPath
             ) as! EventCell
             
             //for test
@@ -66,7 +66,7 @@ class LeaguesDetailsCollectionViewController: UICollectionViewController {
         case 1:
             let cell = collectionView.dequeueReusableCell(
                 withReuseIdentifier: teamsIdentifier,
-                for: indexPath,
+                for: indexPath
             ) as! TeamsCollectionViewCell
             
             cell.config(team: TeamModel(name: "Test"))
@@ -76,7 +76,7 @@ class LeaguesDetailsCollectionViewController: UICollectionViewController {
         case 2:
             let cell = collectionView.dequeueReusableCell(
                 withReuseIdentifier: eventsIdentifier,
-                for: indexPath,
+                for: indexPath
             ) as! EventCell
             
             //for test
@@ -87,7 +87,7 @@ class LeaguesDetailsCollectionViewController: UICollectionViewController {
         default:
             let cell = collectionView.dequeueReusableCell(
                 withReuseIdentifier: eventsIdentifier,
-                for: indexPath,
+                for: indexPath
             ) as! EventCell
             
             return cell
@@ -146,7 +146,7 @@ extension LeaguesDetailsCollectionViewController{
         //item
         let itemSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1),
-            heightDimension: .fractionalHeight(1),
+            heightDimension: .fractionalHeight(1)
         )
         
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
@@ -155,7 +155,7 @@ extension LeaguesDetailsCollectionViewController{
         //group
         let groupSize = NSCollectionLayoutSize(
             widthDimension: .absolute(100),
-            heightDimension: .absolute(130),
+            heightDimension: .absolute(130)
         )
         let eventsGroup = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
         
@@ -172,7 +172,7 @@ extension LeaguesDetailsCollectionViewController{
         //item
         let itemSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1),
-            heightDimension: .fractionalHeight(1),
+            heightDimension: .fractionalHeight(1)
         )
         
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
@@ -181,7 +181,7 @@ extension LeaguesDetailsCollectionViewController{
         //group
         let groupSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1),
-            heightDimension: .absolute(220),
+            heightDimension: .absolute(220)
         )
         let eventsGroup = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
         
@@ -202,7 +202,7 @@ extension LeaguesDetailsCollectionViewController{
         let header = NSCollectionLayoutBoundarySupplementaryItem(
                 layoutSize: headerSize,
                 elementKind: UICollectionView.elementKindSectionHeader,
-                alignment: .top,
+                alignment: .top
         )
         
         header.contentInsets = NSDirectionalEdgeInsets(
