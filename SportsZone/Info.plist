@@ -9,8 +9,6 @@
 		<string>Nunito-SemiBold.ttf</string>
 		<string>Nunito-Bold.ttf</string>
 	</array>
-	<key>CFBundleIdentifier</key>
-	<string></string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
