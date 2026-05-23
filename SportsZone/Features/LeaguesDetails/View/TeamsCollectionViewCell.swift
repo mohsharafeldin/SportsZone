@@ -19,9 +19,11 @@ class TeamsCollectionViewCell: UICollectionViewCell {
         teamName.font = UIFont(name: "Nunito-SemiBold", size: 18)
     }
     
-    func config(team: TeamModel){
-        teamName.text = team.name
-        
-        //TODO: config team imge
+    func config(team: Team){
+        teamName.text = team.teamName
+        teamImage.sd_setImage(
+            with: URL(string: team.teamLogo),
+            placeholderImage: UIImage(named: "logo.png")
+        )
     }
 }
