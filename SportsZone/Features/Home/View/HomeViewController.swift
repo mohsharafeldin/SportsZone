@@ -38,9 +38,9 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        var padding = 16.0
-        var totalSpace = padding * 3
-        var width = (collectionView.frame.width-totalSpace)/2
+       let padding = 16.0
+        let totalSpace = padding * 3
+        let width = (collectionView.frame.width-totalSpace)/2
         
         return CGSize(width: width, height: width * 1.2)
     }
