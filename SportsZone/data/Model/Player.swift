@@ -6,15 +6,15 @@
 //
 
 struct Player: Decodable {
-    let playerKey: Int
-    let playerImage: String
-    let playerName: String
-    let playerNumber: String
-    let playerType: String
-    let playerAge: String
-    let playerRating: String
-    let playerYellowCards: String
-    let playerRedCards: String
+    let playerKey: Int?
+    let playerImage: String?
+    let playerName: String?
+    let playerNumber: String?
+    let playerType: String?
+    let playerAge: String?
+    let playerRating: String?
+    let playerYellowCards: String?
+    let playerRedCards: String?
     
     enum CodingKeys: String, CodingKey{
         case playerKey = "player_key"

@@ -36,6 +36,9 @@
 		D571244C2FBE1E7A0091FB75 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D57124472FBE1E7A0091FB75 /* Main.storyboard */; };
 		D5818ABB2FC3BA4B0044DBC2 /* TeamsRepo.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5818ABA2FC3BA400044DBC2 /* TeamsRepo.swift */; };
 		D5818AC12FC3BD670044DBC2 /* TeamDetailsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5818AC02FC3BD540044DBC2 /* TeamDetailsPresenter.swift */; };
+		D5818AC32FC3D0630044DBC2 /* TeamDetailesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5818AC22FC3D0630044DBC2 /* TeamDetailesViewController.swift */; };
+		D5818AC82FC3D9940044DBC2 /* PlayerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5818AC72FC3D9940044DBC2 /* PlayerCell.xib */; };
+		D5818AC92FC3D9940044DBC2 /* PlayerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5818AC62FC3D9940044DBC2 /* PlayerCell.swift */; };
 		D58DBF342FC3972B000F4C1A /* Team.swift in Sources */ = {isa = PBXBuildFile; fileRef = D58DBF2F2FC3972B000F4C1A /* Team.swift */; };
 		D58DBF352FC3972B000F4C1A /* LeaguesRepo.swift in Sources */ = {isa = PBXBuildFile; fileRef = D58DBF312FC3972B000F4C1A /* LeaguesRepo.swift */; };
 		D58DBF362FC3972B000F4C1A /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = D58DBF2E2FC3972B000F4C1A /* Event.swift */; };
@@ -96,6 +99,9 @@
 		D57124462FBE1E7A0091FB75 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		D5818ABA2FC3BA400044DBC2 /* TeamsRepo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamsRepo.swift; sourceTree = "<group>"; };
 		D5818AC02FC3BD540044DBC2 /* TeamDetailsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamDetailsPresenter.swift; sourceTree = "<group>"; };
+		D5818AC22FC3D0630044DBC2 /* TeamDetailesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamDetailesViewController.swift; sourceTree = "<group>"; };
+		D5818AC62FC3D9940044DBC2 /* PlayerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerCell.swift; sourceTree = "<group>"; };
+		D5818AC72FC3D9940044DBC2 /* PlayerCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlayerCell.xib; sourceTree = "<group>"; };
 		D58DBF2E2FC3972B000F4C1A /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		D58DBF2F2FC3972B000F4C1A /* Team.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Team.swift; sourceTree = "<group>"; };
 		D58DBF312FC3972B000F4C1A /* LeaguesRepo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaguesRepo.swift; sourceTree = "<group>"; };
@@ -283,6 +289,7 @@
 				D57124432FBE1E7A0091FB75 /* HeaderView.xib */,
 				D57124452FBE1E7A0091FB75 /* LaunchScreen.storyboard */,
 				D57124472FBE1E7A0091FB75 /* Main.storyboard */,
+				D5818AC72FC3D9940044DBC2 /* PlayerCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -307,6 +314,8 @@
 		D5818ABF2FC3BD480044DBC2 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				D5818AC22FC3D0630044DBC2 /* TeamDetailesViewController.swift */,
+				D5818AC62FC3D9940044DBC2 /* PlayerCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -519,6 +528,7 @@
 				D57124492FBE1E7A0091FB75 /* EventCell.xib in Resources */,
 				D571244A2FBE1E7A0091FB75 /* HeaderView.xib in Resources */,
 				D571244B2FBE1E7A0091FB75 /* LaunchScreen.storyboard in Resources */,
+				D5818AC82FC3D9940044DBC2 /* PlayerCell.xib in Resources */,
 				D571244C2FBE1E7A0091FB75 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -556,8 +566,10 @@
 				D58DBF3E2FC39740000F4C1A /* NetworkManager.swift in Sources */,
 				D5818AC12FC3BD670044DBC2 /* TeamDetailsPresenter.swift in Sources */,
 				D58DBF3F2FC39740000F4C1A /* ApiKeyInterceptor.swift in Sources */,
+				D5818AC92FC3D9940044DBC2 /* PlayerCell.swift in Sources */,
 				D58DBF402FC39740000F4C1A /* HelperFunctions.swift in Sources */,
 				5A4FF29F2FC1379800CB7BD4 /* HomeViewController.swift in Sources */,
+				D5818AC32FC3D0630044DBC2 /* TeamDetailesViewController.swift in Sources */,
 				5A4FF2A62FC1776200CB7BD4 /* LeaguesListViewController.swift in Sources */,
 				D5311DFB2FC3A6F2000F2AA7 /* Coach.swift in Sources */,
 				D58DBF342FC3972B000F4C1A /* Team.swift in Sources */,
