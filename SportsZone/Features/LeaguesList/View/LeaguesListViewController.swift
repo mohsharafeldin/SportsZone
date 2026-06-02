@@ -151,6 +151,24 @@ UITableViewDataSource {
         
         cell.countryImage.clipsToBounds = true
         
+        // making faviurite buttun collered
+        let isFavourite =
+        FavouriteManager.shared.isFavourite(
+            id: Int64(league.leagueKey ?? 0)
+        )
+
+        let imageName =
+        isFavourite ? "heart.fill" : "heart"
+
+        cell.favouriteButton.setImage(
+            UIImage(systemName: imageName),
+            for: .normal
+        )
+
+        cell.favouriteButton.tintColor =
+        isFavourite ? .systemRed : .lightGray
+        
+        
         return cell
     }
     
@@ -199,7 +217,7 @@ UITableViewDataSource {
     }
 }
 
-// MARK: - Search
+// Search
 
 extension LeaguesListViewController:
 UISearchBarDelegate {
@@ -262,69 +280,58 @@ LeagueCellDelegate {
         let league =
         presenter.filteredLeagues[indexPath.row]
         
-        //  Prevent Duplicate
+        let leagueID =
+        Int64(league.leagueKey ?? 0)
         
-        if FavouriteManager.shared.isFavourite(
-            id: Int64(league.leagueKey ?? 0)
-        ) {
+        let isFavourite =
+        FavouriteManager.shared.isFavourite(
+            id: leagueID
+        )
+        
+        //  Remove
+        
+        if isFavourite {
             
-            let alert = UIAlertController(
-                title: "Already Added",
-                message:
-                    "League already exists in favourites",
-                preferredStyle: .alert
+            FavouriteManager.shared.deleteLeague(
+                id: leagueID
             )
             
-            alert.addAction(
-                UIAlertAction(
-                    title: "OK",
-                    style: .default
+            cell.favouriteButton.setImage(
+                UIImage(systemName: "heart"),
+                for: .normal
+            )
+            
+            cell.favouriteButton.tintColor =
+            .lightGray
+            
+        } else {
+            
+            let leagueImageData =
+            cell.leagueImage.image?
+                .jpegData(
+                    compressionQuality: 0.8
                 )
+            
+            let countryImageData =
+            cell.countryImage.image?
+                .jpegData(
+                    compressionQuality: 0.8
+                )
+            
+            FavouriteManager.shared.saveLeague(
+                league: league,
+                leagueImage: leagueImageData,
+                countryImage: countryImageData
             )
             
-            present(alert, animated: true)
+            cell.favouriteButton.setImage(
+                UIImage(systemName: "heart.fill"),
+                for: .normal
+            )
             
-            return
+            cell.favouriteButton.tintColor =
+            .systemRed
         }
-        
-        // Convert Images
-        
-        let leagueImageData =
-        cell.leagueImage.image?
-            .jpegData(
-                compressionQuality: 0.8
-            )
-        
-        let countryImageData =
-        cell.countryImage.image?
-            .jpegData(
-                compressionQuality: 0.8
-            )
-        
-        //  Save
-        
-        FavouriteManager.shared.saveLeague(
-            league: league,
-            leagueImage: leagueImageData,
-            countryImage: countryImageData
-        )
-        
-        // - Success Alert
-        
-        let alert = UIAlertController(
-            title: "Success",
-            message:
-                "League Added To Favourites",
-            preferredStyle: .alert
-        )
-        
-        alert.addAction(
-            UIAlertAction(
-                title: "OK",
-                style: .default
-            )
-        )
-        
-        present(alert, animated: true)
     }
+
 }

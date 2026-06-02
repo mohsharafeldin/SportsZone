@@ -64,6 +64,7 @@
             <connections>
                 <outlet property="countryImage" destination="Ab3-rx-RBo" id="cFC-GQ-cR6"/>
                 <outlet property="countryName" destination="4ho-di-BBq" id="8wt-YR-JjD"/>
+                <outlet property="favouriteButton" destination="iZ2-YB-61w" id="3Fp-eA-5kc"/>
                 <outlet property="leagueImage" destination="qb7-hB-blG" id="Cug-oS-IpX"/>
                 <outlet property="leagueName" destination="b2l-9I-1nT" id="Bae-ft-rvH"/>
             </connections>
