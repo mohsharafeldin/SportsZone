@@ -17,6 +17,8 @@ class LeagueCell: UITableViewCell {
     @IBOutlet weak var countryImage: UIImageView!
     
     @IBOutlet weak var countryName: UILabel!
+    
+    @IBOutlet weak var favouriteButton: UIButton!
     weak var delegate: LeagueCellDelegate?
     override func awakeFromNib() {
         super.awakeFromNib()

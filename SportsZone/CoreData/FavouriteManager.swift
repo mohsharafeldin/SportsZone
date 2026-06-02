@@ -22,16 +22,43 @@ class FavouriteManager {
         countryImage: Data?
     ) {
         
-        let fav = FavouriteLeague(context: context)
+        let leagueID =
+        Int64(league.leagueKey ?? 0)
         
-        fav.leagueID = Int64(league.leagueKey ?? 0)
-        fav.leagueName = league.leagueName
-        fav.countryName = league.countryName
-        fav.leagueLogo = leagueImage
-        fav.countryLogo = countryImage
+        // Prevent duplicates
         
-        try? context.save()
+        if isFavourite(id: leagueID) {
+            return
+        }
+        
+        let fav = FavouriteLeague(
+            context: context
+        )
+        
+        fav.leagueID = leagueID
+        
+        fav.leagueName =
+        league.leagueName
+        
+        fav.countryName =
+        league.countryName
+        
+        fav.leagueLogo =
+        leagueImage
+        
+        fav.countryLogo =
+        countryImage
+        
+        do {
+            
+            try context.save()
+            
+        } catch {
+            
+            print(error.localizedDescription)
+        }
     }
+
     
     func fetchFavourites() -> [FavouriteLeague] {
         
@@ -43,19 +70,33 @@ class FavouriteManager {
     
     func deleteLeague(id: Int64) {
         
-        let request: NSFetchRequest<FavouriteLeague>
+        let request:
+        NSFetchRequest<FavouriteLeague>
         = FavouriteLeague.fetchRequest()
         
         request.predicate =
-        NSPredicate(format: "leagueID == %d", id)
+        NSPredicate(
+            format: "leagueID == %d",
+            id
+        )
         
-        if let result = try? context.fetch(request).first {
+        do {
             
-            context.delete(result)
+            let results =
+            try context.fetch(request)
             
-            try? context.save()
+            for item in results {
+                context.delete(item)
+            }
+            
+            try context.save()
+            
+        } catch {
+            
+            print(error.localizedDescription)
         }
     }
+
     
     func isFavourite(id: Int64) -> Bool {
         
