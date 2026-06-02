@@ -53,6 +53,7 @@
 		D58DBF4C2FC397A8000F4C1A /* LeaguesDetailsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D58DBF412FC397A8000F4C1A /* LeaguesDetailsPresenter.swift */; };
 		D58DBF4D2FC397A8000F4C1A /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D58DBF442FC397A8000F4C1A /* HeaderView.swift */; };
 		D58DBF4E2FC397A8000F4C1A /* LeaguesDetailsCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D58DBF462FC397A8000F4C1A /* LeaguesDetailsCollectionViewController.swift */; };
+		D5A78D9A2FCF3F96009E7DC8 /* SkeletonView in Frameworks */ = {isa = PBXBuildFile; productRef = D5A78D992FCF3F96009E7DC8 /* SkeletonView */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -129,6 +130,7 @@
 				5AD06DA92FBE2E8F004674CD /* Alamofire in Frameworks */,
 				5AD06DAC2FBE2FD2004674CD /* ShimmerSwift in Frameworks */,
 				5AD06DA62FBE2C60004674CD /* Reachability in Frameworks */,
+				D5A78D9A2FCF3F96009E7DC8 /* SkeletonView in Frameworks */,
 				5AD06DA12FBE2BEF004674CD /* SDWebImage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -431,6 +433,7 @@
 				5AD06DA52FBE2C60004674CD /* Reachability */,
 				5AD06DA82FBE2E8F004674CD /* Alamofire */,
 				5AD06DAB2FBE2FD2004674CD /* ShimmerSwift */,
+				D5A78D992FCF3F96009E7DC8 /* SkeletonView */,
 			);
 			productName = SportsZone;
 			productReference = 5A9543262FBC874B00571374 /* SportsZone.app */;
@@ -509,6 +512,7 @@
 				5AD06DA42FBE2C60004674CD /* XCRemoteSwiftPackageReference "Reachability" */,
 				5AD06DA72FBE2E8F004674CD /* XCRemoteSwiftPackageReference "Alamofire" */,
 				5AD06DAA2FBE2FD2004674CD /* XCRemoteSwiftPackageReference "ShimmerSwift" */,
+				D5A78D982FCF3F96009E7DC8 /* XCRemoteSwiftPackageReference "SkeletonView" */,
 			);
 			productRefGroup = 5A9543272FBC874B00571374 /* Products */;
 			projectDirPath = "";
@@ -959,6 +963,14 @@
 				minimumVersion = 2.0.0;
 			};
 		};
+		D5A78D982FCF3F96009E7DC8 /* XCRemoteSwiftPackageReference "SkeletonView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Juanpe/SkeletonView";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.31.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -986,6 +998,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 5AD06DAA2FBE2FD2004674CD /* XCRemoteSwiftPackageReference "ShimmerSwift" */;
 			productName = ShimmerSwift;
+		};
+		D5A78D992FCF3F96009E7DC8 /* SkeletonView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D5A78D982FCF3F96009E7DC8 /* XCRemoteSwiftPackageReference "SkeletonView" */;
+			productName = SkeletonView;
 		};
 /* End XCSwiftPackageProductDependency section */
 

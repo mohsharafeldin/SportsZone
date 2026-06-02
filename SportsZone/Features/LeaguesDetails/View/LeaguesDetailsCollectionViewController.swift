@@ -5,6 +5,7 @@
 //  Created by Nadin Ahmed on 19/05/2026.
 //
 
+import SkeletonView
 import UIKit
 
 private let eventsIdentifier = "EventCellId"
@@ -57,7 +58,7 @@ class LeaguesDetailsCollectionViewController: UICollectionViewController {
             UINib(nibName: "EventCell", bundle: nil),
             forCellWithReuseIdentifier: eventsIdentifier
         )
-        
+
         collectionView.register(
             UINib(nibName: "EmptyCollectionViewCell", bundle: nil),
             forCellWithReuseIdentifier: emptyCellIdentifire
@@ -65,35 +66,45 @@ class LeaguesDetailsCollectionViewController: UICollectionViewController {
 
         collectionView.collectionViewLayout = createLayout()
     }
-    
+
     private func createLayout() -> UICollectionViewLayout {
 
-        return UICollectionViewCompositionalLayout { [weak self] sectionIndex, environment in
-            
+        return UICollectionViewCompositionalLayout {
+            [weak self] sectionIndex, environment in
+
             guard let self = self else { return nil }
-            
+
             return self.createSection(for: sectionIndex)
         }
     }
-    
+
     private func createSection(for section: Int) -> NSCollectionLayoutSection {
 
+        if presenter.isLoading {
+                switch section {
+                case 0: return setupUpcomingEventsSection()
+                case 1: return setupTeamsSection()
+                case 2: return setupLastEventsSection()
+                default: return emptySectionLayout(height: 220)
+                }
+            }
+        
         switch section {
 
         case 0:
             return presenter.upcomingEvents.isEmpty
-            ? emptySectionLayout(height: 220)
-            : setupUpcomingEventsSection()
+                ? emptySectionLayout(height: 220)
+                : setupUpcomingEventsSection()
 
         case 1:
             return presenter.teams.isEmpty
-            ? emptySectionLayout(height: 180)
-            : setupTeamsSection()
+                ? emptySectionLayout(height: 180)
+                : setupTeamsSection()
 
         case 2:
             return presenter.latestEvents.isEmpty
-            ? emptySectionLayout(height: 250)
-            : setupLastEventsSection()
+                ? emptySectionLayout(height: 250)
+                : setupLastEventsSection()
 
         default:
             return emptySectionLayout(height: 220)
@@ -120,6 +131,27 @@ class LeaguesDetailsCollectionViewController: UICollectionViewController {
         _ collectionView: UICollectionView,
         cellForItemAt indexPath: IndexPath
     ) -> UICollectionViewCell {
+
+        if presenter.isLoading {
+            switch indexPath.section {
+            case 0, 2:
+                let cell =
+                    collectionView.dequeueReusableCell(
+                        withReuseIdentifier: eventsIdentifier,
+                        for: indexPath
+                    ) as! EventCell
+                return cell
+            case 1:
+                let cell =
+                    collectionView.dequeueReusableCell(
+                        withReuseIdentifier: teamsIdentifier,
+                        for: indexPath
+                    ) as! TeamsCollectionViewCell
+                return cell
+            default:
+                break
+            }
+        }
 
         switch indexPath.section {
         case 0:
@@ -165,7 +197,7 @@ class LeaguesDetailsCollectionViewController: UICollectionViewController {
             }
 
         case 2:
-            if presenter.upcomingEvents.isEmpty {
+            if presenter.latestEvents.isEmpty {
                 let cell =
                     collectionView.dequeueReusableCell(
                         withReuseIdentifier: emptyCellIdentifire,
@@ -226,7 +258,7 @@ class LeaguesDetailsCollectionViewController: UICollectionViewController {
 
 extension LeaguesDetailsCollectionViewController {
     func setupUpcomingEventsSection() -> NSCollectionLayoutSection {
-        
+
         //item
         let itemSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1),
@@ -366,8 +398,8 @@ extension LeaguesDetailsCollectionViewController {
 
         return header
     }
-    
-    private func emptySectionLayout(height:Int) -> NSCollectionLayoutSection {
+
+    private func emptySectionLayout(height: Int) -> NSCollectionLayoutSection {
 
         let itemSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1),
@@ -397,20 +429,33 @@ extension LeaguesDetailsCollectionViewController {
 extension LeaguesDetailsCollectionViewController: LeaguesDetailsViewProtocol {
     func showLoading() {
         DispatchQueue.main.async {
-            self.showLoadingIndecator()
+            //self.showLoadingIndecator()
+            self.collectionView.isSkeletonable = true
+            self.collectionView.showAnimatedGradientSkeleton(
+                usingGradient: SkeletonGradient(
+                    baseColor: .systemGray5,
+                    secondaryColor: .lightGray
+                ),
+                animation: nil,
+                transition: .crossDissolve(0.25)
+            )
         }
     }
 
     func hideLoading() {
         DispatchQueue.main.async {
-            self.hideLoadingIndecator()
+            //self.hideLoadingIndecator()
+            self.collectionView.stopSkeletonAnimation()
+            self.collectionView.hideSkeleton(reloadDataAfter: false)
         }
     }
 
     func reloadData() {
         DispatchQueue.main.async {
+            self.collectionView.setCollectionViewLayout(
+                self.createLayout(),animated: false
+            )
             self.collectionView.reloadData()
-            self.collectionView.setCollectionViewLayout(self.createLayout(), animated: false)
         }
     }
 
@@ -422,5 +467,31 @@ extension LeaguesDetailsCollectionViewController: LeaguesDetailsViewProtocol {
         )
         alert.addAction(UIAlertAction(title: "OK", style: .default))
         present(alert, animated: true)
+    }
+}
+
+extension LeaguesDetailsCollectionViewController:
+    SkeletonCollectionViewDataSource
+{
+    func collectionSkeletonView(
+        _ skeletonView: UICollectionView,
+        cellIdentifierForItemAt indexPath: IndexPath
+    ) -> SkeletonView.ReusableCellIdentifier {
+        switch indexPath.section {
+        case 0, 2: return eventsIdentifier
+        case 1: return teamsIdentifier
+        default: return eventsIdentifier
+        }
+    }
+
+    func numSections(in collectionSkeletonView: UICollectionView) -> Int {
+            return 3
+        }
+    
+    func collectionSkeletonView(
+        _ skeletonView: UICollectionView,
+        numberOfItemsInSection section: Int
+    ) -> Int {
+        return 5
     }
 }

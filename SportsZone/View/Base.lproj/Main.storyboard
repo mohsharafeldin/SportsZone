@@ -53,15 +53,24 @@
                                                         <constraint firstAttribute="height" constant="70" id="U9U-i1-Gew"/>
                                                         <constraint firstAttribute="width" constant="70" id="cca-wP-0qj"/>
                                                     </constraints>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                                                    </userDefinedRuntimeAttributes>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GZS-VU-lig">
                                                     <rect key="frame" x="25.666666666666668" y="78" width="45.666666666666657" height="24"/>
                                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
                                                     <color key="textColor" name="TextPrimary"/>
                                                     <nil key="highlightedColor"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                                                    </userDefinedRuntimeAttributes>
                                                 </label>
                                             </subviews>
                                             <color key="backgroundColor" name="Background"/>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                                            </userDefinedRuntimeAttributes>
                                         </stackView>
                                     </subviews>
                                     <color key="backgroundColor" name="Background"/>
@@ -72,9 +81,15 @@
                                         <constraint firstItem="sHS-K2-zEC" firstAttribute="top" secondItem="n91-3R-dea" secondAttribute="top" constant="16" id="oT4-HB-V48"/>
                                         <constraint firstItem="sHS-K2-zEC" firstAttribute="leading" secondItem="n91-3R-dea" secondAttribute="leading" constant="16" id="xrI-ft-Xkd"/>
                                     </constraints>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                                    </userDefinedRuntimeAttributes>
                                 </collectionViewCellContentView>
                                 <color key="backgroundColor" name="Background"/>
                                 <size key="customSize" width="129" height="134"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <outlet property="teamImage" destination="gzp-lg-6EL" id="fxf-gv-ANs"/>
                                     <outlet property="teamName" destination="GZS-VU-lig" id="jKQ-KG-WT6"/>
