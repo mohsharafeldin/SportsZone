@@ -34,7 +34,7 @@ class TeamsRepo: TeamsRepoProtocol {
         newtwork.request(sport: sport, paremeters: params) {
             (result: Result<TeamResponse, Error>) in
             switch result {
-            case .success(let data): completion(.success(data.result))
+            case .success(let data): completion(.success(data.result ?? []))
             case .failure(let error): completion(.failure(error))
             }
         }

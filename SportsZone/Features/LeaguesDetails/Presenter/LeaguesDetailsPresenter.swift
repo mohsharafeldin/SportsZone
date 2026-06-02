@@ -39,7 +39,7 @@ class LeaguesDetailsPresenter {
             defer { group.leave() }
             switch result {
 
-            case .success(let data):
+            case .success(let data):                
                 let today = Date()
                 self?.upcomingEvents = data.filter { $0.eventDate >= formattedDate(today) }
                 self?.latestEvents   = data.filter { $0.eventDate < formattedDate(today) }

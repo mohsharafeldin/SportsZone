@@ -17,6 +17,8 @@ class TeamsCollectionViewCell: UICollectionViewCell {
         teamImage.clipsToBounds = true
         
         teamName.font = UIFont(name: "Nunito-SemiBold", size: 18)
+        
+        addShadow(to: contentView)
     }
     
     func config(team: Team){

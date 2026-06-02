@@ -19,6 +19,7 @@ class EventCell: UICollectionViewCell {
     @IBOutlet private weak var tittleLabel: UILabel!
     @IBOutlet private weak var dateLabel: UILabel!
     @IBOutlet private weak var statusLabel: UILabel!
+    @IBOutlet private weak var eventView: UIView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -37,6 +38,26 @@ class EventCell: UICollectionViewCell {
         team2Image.layer.cornerRadius = team2Image.frame.width / 2
         team2Image.clipsToBounds = true
         
+        self.setupShadow()
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        layer.shadowPath = UIBezierPath(
+            roundedRect: bounds,
+            cornerRadius: 12
+        ).cgPath
+    }
+    
+    private func setupShadow() {
+        contentView.layer.cornerRadius = 12
+        contentView.layer.masksToBounds = true   
+        
+        layer.shadowColor = UIColor.black.cgColor
+        layer.shadowOpacity = 0.2
+        layer.shadowOffset = CGSize(width: 0, height: 4)
+        layer.shadowRadius = 6
+        layer.masksToBounds = false
     }
     
     func config(event: Event) {

@@ -9,7 +9,7 @@ import Foundation
 
 struct EventResponse: Decodable {
     let success: Int
-    let result: [Event]
+    let result: [Event]?
 }
 
 struct Event: Decodable {

@@ -9,7 +9,7 @@ import Foundation
 
 struct TeamResponse: Decodable {
     let success: Int
-    let result: [Team]
+    let result: [Team]?
 }
 
 struct Team: Decodable {
