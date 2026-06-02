@@ -74,6 +74,22 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
     }
     
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        let index = indexPath.section * 2 + indexPath.row
+        
+        let selectedSport = sports[index]
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        
+        let vc = storyboard.instantiateViewController(withIdentifier: "LeaguesListViewController") as! LeaguesListViewController
+        
+        vc.selectedSport = SportType(rawValue: selectedSport.1)
+        
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    
     
     
 
