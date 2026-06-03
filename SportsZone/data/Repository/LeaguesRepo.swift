@@ -46,7 +46,7 @@ class LeaguesRepo: LeaguesRepoProtocol {
         network.request(sport: sport, paremeters: params) {
             (result: Result<EventResponse, Error>) in
             switch result {
-            case .success(let data): completion(.success(data.result))
+            case .success(let data): completion(.success(data.result ?? []))
             case .failure(let error): completion(.failure(error))
             }
         }
@@ -66,7 +66,7 @@ class LeaguesRepo: LeaguesRepoProtocol {
         network.request(sport: sport, paremeters: params) {
             (result: Result<TeamResponse, Error>) in
             switch result {
-            case .success(let data): completion(.success(data.result))
+            case .success(let data): completion(.success(data.result ?? []))
             case .failure(let error): completion(.failure(error))
             }
         }

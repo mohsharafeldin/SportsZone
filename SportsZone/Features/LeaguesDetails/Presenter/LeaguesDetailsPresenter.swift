@@ -21,6 +21,7 @@ class LeaguesDetailsPresenter {
     private(set) var upcomingEvents: [Event] = []
     private(set) var latestEvents: [Event]   = []
     private(set) var teams: [Team] = []
+    private(set) var isLoading = false
 
     init(repository: LeaguesRepoProtocol = LeaguesRepo()) {
         self.repo = repository
@@ -28,6 +29,7 @@ class LeaguesDetailsPresenter {
 
     func loadData(sport: SportType, leagueID: String, from: String, to: String)
     {
+        isLoading = true
         view?.showLoading()
 
         let group = DispatchGroup()
@@ -39,7 +41,7 @@ class LeaguesDetailsPresenter {
             defer { group.leave() }
             switch result {
 
-            case .success(let data):
+            case .success(let data):                
                 let today = Date()
                 self?.upcomingEvents = data.filter { $0.eventDate >= formattedDate(today) }
                 self?.latestEvents   = data.filter { $0.eventDate < formattedDate(today) }
@@ -71,6 +73,8 @@ class LeaguesDetailsPresenter {
             [weak self] in
             
             guard let self = self else { return }
+            
+            self.isLoading = false
             self.view?.hideLoading()
             self.view?.reloadData()
         }

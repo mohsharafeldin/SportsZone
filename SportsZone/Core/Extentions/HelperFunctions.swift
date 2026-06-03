@@ -14,6 +14,19 @@ func formattedDate(_ date: Date) -> String {
     return f.string(from: date)
 }
 
+func addShadow(to view: UIView) {
+    view.layer.cornerRadius = 12
+    view.layer.masksToBounds = false
+    view.layer.shadowColor = UIColor.black.cgColor
+    view.layer.shadowOpacity = 0.1
+    view.layer.shadowOffset = CGSize(width: 0, height: 2)
+    view.layer.shadowRadius = 4
+    view.layer.shadowPath = UIBezierPath(
+        roundedRect: view.bounds,
+        cornerRadius: view.layer.cornerRadius
+    ).cgPath
+}
+
 extension UIViewController {
 
     func showLoadingIndecator() {

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SkeletonView
 
 class TeamsCollectionViewCell: UICollectionViewCell {
     
@@ -17,6 +18,13 @@ class TeamsCollectionViewCell: UICollectionViewCell {
         teamImage.clipsToBounds = true
         
         teamName.font = UIFont(name: "Nunito-SemiBold", size: 18)
+        
+        addShadow(to: contentView)
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        hideSkeleton()
     }
     
     func config(team: Team){
