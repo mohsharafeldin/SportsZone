@@ -28,9 +28,9 @@ protocol LeaguesRepoProtocol {
 
 class LeaguesRepo: LeaguesRepoProtocol {
 
-    private let network: NetworkManager
+    private let network: NetworkManagerProtocol
 
-    init(network: NetworkManager = .shared) {
+    init(network: NetworkManagerProtocol = NetworkManager.shared) {
         self.network = network
     }
 

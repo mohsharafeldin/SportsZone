@@ -15,9 +15,9 @@ protocol TeamsRepoProtocol {
 
 class TeamsRepo: TeamsRepoProtocol {
 
-    private let newtwork: NetworkManager
+    private let newtwork: NetworkManagerProtocol
 
-    init(newtwork: NetworkManager = .shared) {
+    init(newtwork: NetworkManagerProtocol = NetworkManager.shared) {
         self.newtwork = newtwork
     }
 
