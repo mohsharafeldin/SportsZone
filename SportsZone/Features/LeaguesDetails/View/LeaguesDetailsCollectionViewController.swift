@@ -25,8 +25,6 @@ class LeaguesDetailsCollectionViewController: UICollectionViewController {
 
         setupCollectionView()
         setupPresenter()
-        print("leagues id from home \(leagueID)")
-
     }
 
     private func setupPresenter() {
@@ -254,6 +252,23 @@ class LeaguesDetailsCollectionViewController: UICollectionViewController {
         }
 
         return header
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        guard indexPath.section == 1 else {return}
+        guard !presenter.teams.isEmpty else {return}
+        
+        let selectedTeam = presenter.teams[indexPath.item]
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let teamsDetailesVC = storyboard.instantiateViewController(withIdentifier: "TeamDetailsScreen") as! TeamDetailesViewController
+        
+        teamsDetailesVC.sport = self.sport
+        teamsDetailesVC.teamId = String(selectedTeam.teamKey)
+        
+        navigationController?.pushViewController(teamsDetailesVC, animated: true)
+        
     }
 }
 

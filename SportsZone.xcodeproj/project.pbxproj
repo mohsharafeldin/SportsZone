@@ -181,7 +181,6 @@
 		5A3249602FCD5DD4009D0655 /* FavouriteLeagues */ = {
 			isa = PBXGroup;
 			children = (
-				5A952A5C2FCF144200D5D8CC /* Presenter */,
 				5A4FF2A82FC179D300CB7BD4 /* View */,
 			);
 			path = FavouriteLeagues;
@@ -246,13 +245,6 @@
 			isa = PBXGroup;
 			children = (
 				5A952A5D2FCF146400D5D8CC /* LeaguesPresenter.swift */,
-			);
-			path = Presenter;
-			sourceTree = "<group>";
-		};
-		5A952A5C2FCF144200D5D8CC /* Presenter */ = {
-			isa = PBXGroup;
-			children = (
 			);
 			path = Presenter;
 			sourceTree = "<group>";
