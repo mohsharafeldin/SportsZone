@@ -192,6 +192,12 @@ UITableViewDataSource {
                     "LeagueDetailsViewController"
             ) as! LeaguesDetailsCollectionViewController
             
+            detailsVC.sport = selectedSport ?? .football
+            
+            let leaguesId = presenter.leagues[indexPath.item].leagueKey ?? 0
+            print("leagues selected is: \(leaguesId)")
+            detailsVC.leagueID = String(leaguesId)
+            
             navigationController?.pushViewController(
                 detailsVC,
                 animated: true

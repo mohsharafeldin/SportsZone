@@ -25,6 +25,7 @@ class LeaguesDetailsCollectionViewController: UICollectionViewController {
 
         setupCollectionView()
         setupPresenter()
+        print("leagues id from home \(leagueID)")
 
     }
 
