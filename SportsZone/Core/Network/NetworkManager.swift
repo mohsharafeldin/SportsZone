@@ -8,7 +8,15 @@
 import Foundation
 import Alamofire
 
-class NetworkManager{
+protocol NetworkManagerProtocol {
+    func request<T: Decodable>(
+        sport: SportType,
+        paremeters: [String: String],
+        completion: @escaping (Result<T, Error>) -> Void
+    )
+}
+
+class NetworkManager : NetworkManagerProtocol{
     
     static let shared = NetworkManager()
     private let session: Session
