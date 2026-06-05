@@ -23,8 +23,24 @@ class LeaguesListViewController: UIViewController {
     let searchController =
     UISearchController(searchResultsController: nil)
     
+    private let emptyStateLabel: UILabel = {
+        
+        let label = UILabel()
+        
+        label.textAlignment = .center
+        
+        label.textColor = .secondaryLabel
+        
+        label.numberOfLines = 0
+        
+        label.font = .systemFont(
+            ofSize: 18,
+            weight: .medium
+        )
+        
+        return label
+    }()
  
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -42,6 +58,12 @@ class LeaguesListViewController: UIViewController {
             
             presenter.getLeagues(for: sport)
         }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        tableView.reloadData()
     }
 }
 
@@ -80,6 +102,94 @@ extension LeaguesListViewController {
         
         searchController.searchBar.placeholder =
         "Search League"
+    }
+    
+    func updateEmptyState() {
+        
+        if presenter.filteredLeagues.isEmpty {
+            
+            let emptyView = UIView(
+                frame: tableView.bounds
+            )
+            
+            let imageView = UIImageView(
+                image: UIImage(
+                    systemName: "magnifyingglass"
+                )
+            )
+            
+            imageView.tintColor = .systemGray
+            
+            imageView.translatesAutoresizingMaskIntoConstraints =
+            false
+            
+            imageView.contentMode = .scaleAspectFit
+            
+            let label = UILabel()
+            
+            label.text =
+            "No leagues found\nTry another search term"
+            
+            label.textAlignment = .center
+            
+            label.numberOfLines = 0
+            
+            label.textColor = .secondaryLabel
+            
+            label.translatesAutoresizingMaskIntoConstraints =
+            false
+            
+            emptyView.addSubview(imageView)
+            
+            emptyView.addSubview(label)
+            
+            NSLayoutConstraint.activate([
+                
+                imageView.centerXAnchor.constraint(
+                    equalTo: emptyView.centerXAnchor
+                ),
+                
+                imageView.centerYAnchor.constraint(
+                    equalTo: emptyView.centerYAnchor,
+                    constant: -40
+                ),
+                
+                imageView.widthAnchor.constraint(
+                    equalToConstant: 60
+                ),
+                
+                imageView.heightAnchor.constraint(
+                    equalToConstant: 60
+                ),
+                
+                label.topAnchor.constraint(
+                    equalTo: imageView.bottomAnchor,
+                    constant: 16
+                ),
+                
+                label.centerXAnchor.constraint(
+                    equalTo: emptyView.centerXAnchor
+                ),
+                
+                label.leadingAnchor.constraint(
+                    greaterThanOrEqualTo:
+                        emptyView.leadingAnchor,
+                    constant: 20
+                ),
+                
+                label.trailingAnchor.constraint(
+                    lessThanOrEqualTo:
+                        emptyView.trailingAnchor,
+                    constant: -20
+                )
+            ])
+            
+            tableView.backgroundView = emptyView
+            
+        } else {
+            
+            tableView.backgroundView = nil
+        }
     }
 }
 
@@ -127,7 +237,7 @@ UITableViewDataSource {
                 string: league.leagueLogo ?? ""
             ),
             placeholderImage:
-                UIImage(named: "logo")
+                UIImage(named: "NoLeague")
         )
         
         //  Country Image
@@ -137,7 +247,7 @@ UITableViewDataSource {
                 string: league.countryLogo ?? ""
             ),
             placeholderImage:
-                UIImage(named: "logo")
+                UIImage(named: "NoCountry")
         )
         
         //  UI
@@ -178,47 +288,51 @@ UITableViewDataSource {
         _ tableView: UITableView,
         didSelectRowAt indexPath: IndexPath
     ) {
-        
-        if ReachabilityManager.shared.isConnected() {
-            
-            let storyboard = UIStoryboard(
-                name: "Main",
-                bundle: nil
-            )
-            
-            let detailsVC =
-            storyboard.instantiateViewController(
-                withIdentifier:
-                    "LeagueDetailsViewController"
-            ) as! LeaguesDetailsCollectionViewController
-            
-            detailsVC.sport = selectedSport ?? .football
-            
-            let leaguesId = presenter.leagues[indexPath.item].leagueKey ?? 0
-            detailsVC.leagueID = String(leaguesId)
-            
-            navigationController?.pushViewController(
-                detailsVC,
-                animated: true
-            )
-            
-        } else {
-            
+
+        guard ReachabilityManager.shared.isConnected()
+        else {
+
             let alert = UIAlertController(
-                title: "Offline",
-                message: "No Internet Connection",
+                title: "No Internet Connection",
+                message: "Internet is required to view league details.",
                 preferredStyle: .alert
             )
-            
+
             alert.addAction(
                 UIAlertAction(
                     title: "OK",
                     style: .default
                 )
             )
-            
+
             present(alert, animated: true)
+
+            return
         }
+
+        let storyboard = UIStoryboard(
+            name: "Main",
+            bundle: nil
+        )
+
+        let detailsVC =
+        storyboard.instantiateViewController(
+            withIdentifier: "LeagueDetailsViewController"
+        ) as! LeaguesDetailsCollectionViewController
+
+        detailsVC.sport =
+        selectedSport ?? .football
+
+        let leagueId =
+        presenter.filteredLeagues[indexPath.row].leagueKey ?? 0
+
+        detailsVC.leagueID =
+        String(leagueId)
+
+        navigationController?.pushViewController(
+            detailsVC,
+            animated: true
+        )
     }
 }
 
@@ -248,6 +362,7 @@ LeaguesViewProtocol {
         hideLoadingIndecator()
         
         tableView.reloadData()
+        updateEmptyState()
     }
     
     func renderError(message: String) {
@@ -297,19 +412,43 @@ LeagueCellDelegate {
         
         if isFavourite {
             
-            FavouriteManager.shared.deleteLeague(
-                id: leagueID
+            let alert = UIAlertController(
+                title: "Remove Favourite",
+                message: "Remove this league from favourites?",
+                preferredStyle: .alert
             )
             
-            cell.favouriteButton.setImage(
-                UIImage(systemName: "heart"),
-                for: .normal
+            alert.addAction(
+                UIAlertAction(
+                    title: "Cancel",
+                    style: .cancel
+                )
             )
             
-            cell.favouriteButton.tintColor =
-            .lightGray
+            alert.addAction(
+                UIAlertAction(
+                    title: "Remove",
+                    style: .destructive
+                ) { _ in
+                    
+                    FavouriteManager.shared.deleteLeague(
+                        id: leagueID
+                    )
+                    
+                    cell.favouriteButton.setImage(
+                        UIImage(systemName: "heart"),
+                        for: .normal
+                    )
+                    
+                    cell.favouriteButton.tintColor =
+                    .lightGray
+                }
+            )
             
-        } else {
+            present(alert, animated: true)
+            
+            return
+        }else {
             
             let leagueImageData =
             cell.leagueImage.image?

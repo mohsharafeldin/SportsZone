@@ -7,231 +7,217 @@
 
 import UIKit
 
-class FavouriteLeaguesViewController: UIViewController {
-    
-    
-    
-    @IBOutlet weak var tableView: UITableView!
-    
+import UIKit
 
-    
-    var favourites: [FavouriteLeague] = []
-    
-    var filteredFavourites: [FavouriteLeague] = []
-    
+class FavouriteLeaguesViewController: UIViewController {
+
+    @IBOutlet weak var tableView: UITableView!
+
+    private let emptyLabel: UILabel = {
+        let label = UILabel()
+        label.textAlignment = .center
+        label.textColor = .secondaryLabel
+        label.numberOfLines = 0
+        return label
+    }()
+
+    var presenter: FavouriteLeaguesPresenter!
+
     let searchController =
     UISearchController(searchResultsController: nil)
-    
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         title = "Favourite Leagues"
-        
+
+        presenter = FavouriteLeaguesPresenter(view: self)
+
         setupTableView()
-        
+
         setupSearchController()
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        loadFavourites()
+
+        presenter.loadFavourites()
     }
-}
 
-
-
-extension FavouriteLeaguesViewController {
-    
     func setupTableView() {
-        
+
         let nib = UINib(
             nibName: "FavouriteLeagueCell",
             bundle: nil
         )
-        
+
         tableView.register(
             nib,
             forCellReuseIdentifier: "cell"
         )
-        
+
         tableView.delegate = self
-        
         tableView.dataSource = self
-        
+
         tableView.rowHeight = 150
-        
         tableView.separatorStyle = .none
     }
-    
+
     func setupSearchController() {
-        
+
         navigationItem.searchController =
         searchController
-        
+
         searchController.searchBar.delegate = self
-        
+
         searchController.obscuresBackgroundDuringPresentation =
         false
-        
+
         searchController.searchBar.placeholder =
         "Search Favourite League"
     }
-    
-    func loadFavourites() {
-        
-        favourites =
-        FavouriteManager.shared.fetchFavourites()
-        
-        filteredFavourites = favourites
-        
-        tableView.reloadData()
-    }
 }
 
-//TableView
+// MARK: - TableView
 
 extension FavouriteLeaguesViewController:
 UITableViewDelegate,
 UITableViewDataSource {
-    
+
     func tableView(
         _ tableView: UITableView,
         numberOfRowsInSection section: Int
     ) -> Int {
-        
-        return filteredFavourites.count
+
+        return presenter.filteredLeagues.count
     }
-    
+
     func tableView(
         _ tableView: UITableView,
         cellForRowAt indexPath: IndexPath
     ) -> UITableViewCell {
-        
+
         let cell = tableView.dequeueReusableCell(
             withIdentifier: "cell",
             for: indexPath
         ) as! FavouriteLeagueCell
-        
+
         let fav =
-        filteredFavourites[indexPath.row]
- 
-        
+        presenter.filteredLeagues[indexPath.row]
+
         cell.leagueName.text =
         fav.leagueName
-        
+
         cell.countryName.text =
         fav.countryName
-        
- 
-        
+
         if let data = fav.leagueLogo {
-            
+
             cell.leagueImage.image =
             UIImage(data: data)
-            
+
         } else {
-            
+
             cell.leagueImage.image =
             UIImage(named: "placeholder")
         }
-        
-        // Country Image
-        
+
         if let data = fav.countryLogo {
-            
+
             cell.countryImage.image =
             UIImage(data: data)
-            
+
         } else {
-            
+
             cell.countryImage.image =
             UIImage(named: "placeholder")
         }
-        
-        //  UI
-        
+
         cell.leagueImage.layer.cornerRadius =
         cell.leagueImage.frame.width / 2
+
         cell.leagueImage.clipsToBounds = true
-        
+
         cell.countryImage.layer.cornerRadius =
         cell.countryImage.frame.width / 2
-        
+
         cell.countryImage.clipsToBounds = true
-        
-        cell.selectionStyle = .none
-        
+
         return cell
     }
-    
-    //  Delete
-    
+
     func tableView(
         _ tableView: UITableView,
         trailingSwipeActionsConfigurationForRowAt
         indexPath: IndexPath
     ) -> UISwipeActionsConfiguration? {
-        
+
         let deleteAction = UIContextualAction(
             style: .destructive,
             title: "Delete"
         ) { [weak self] _, _, completion in
-            
+
             guard let self = self else {
                 completion(false)
                 return
             }
-            
-            let league =
-            self.filteredFavourites[indexPath.row]
-            
-            FavouriteManager.shared.deleteLeague(
-                id: league.leagueID
+
+            let alert = UIAlertController(
+                title: "Remove Favourite",
+                message: "Are you sure you want to delete this league?",
+                preferredStyle: .alert
             )
-            
-            self.loadFavourites()
-            
+
+            alert.addAction(
+                UIAlertAction(
+                    title: "Cancel",
+                    style: .cancel
+                )
+            )
+
+            alert.addAction(
+                UIAlertAction(
+                    title: "Delete",
+                    style: .destructive
+                ) { _ in
+
+                    self.presenter.deleteLeague(
+                        at: indexPath
+                    )
+                }
+            )
+
+            self.present(alert, animated: true)
+
             completion(true)
         }
-        
+
         return UISwipeActionsConfiguration(
             actions: [deleteAction]
         )
     }
-    
-    //  Select
-    
+
     func tableView(
         _ tableView: UITableView,
         didSelectRowAt indexPath: IndexPath
     ) {
-        
+
         tableView.deselectRow(
             at: indexPath,
             animated: true
         )
-        
-        let league =
-        filteredFavourites[indexPath.row]
-        
-        // OFFLINE MODE:
-        // favourites are local so screen can open
-        
+
         let storyboard = UIStoryboard(
             name: "Main",
             bundle: nil
         )
-        
+
         let detailsVC =
         storyboard.instantiateViewController(
             withIdentifier:
-                "LeagueDetailsViewController"
+            "LeagueDetailsViewController"
         )
-        
-        // Pass Data Here Later
-        
+
         navigationController?.pushViewController(
             detailsVC,
             animated: true
@@ -239,34 +225,41 @@ UITableViewDataSource {
     }
 }
 
-// Search
+// MARK: - Search
 
 extension FavouriteLeaguesViewController:
 UISearchBarDelegate {
-    
+
     func searchBar(
         _ searchBar: UISearchBar,
         textDidChange searchText: String
     ) {
-        
-        if searchText.isEmpty {
-            
-            filteredFavourites = favourites
-            
-        } else {
-            
-            filteredFavourites =
-            favourites.filter {
-                
-                $0.leagueName?
-                    .lowercased()
-                    .contains(
-                        searchText.lowercased()
-                    ) ?? false
-            }
-        }
-        
+
+        presenter.search(text: searchText)
+    }
+}
+
+// MARK: - View Protocol
+
+extension FavouriteLeaguesViewController:
+FavouriteLeaguesViewProtocol {
+
+    func renderFavourites() {
+
         tableView.reloadData()
+    }
+
+    func showEmptyState(message: String) {
+
+        emptyLabel.text = message
+
+        tableView.backgroundView =
+        emptyLabel
+    }
+
+    func hideEmptyState() {
+
+        tableView.backgroundView = nil
     }
 }
 

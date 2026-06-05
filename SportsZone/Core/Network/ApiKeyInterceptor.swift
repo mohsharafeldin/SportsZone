@@ -16,7 +16,8 @@ class ApiKeyInterceptor : RequestInterceptor{
         completion: @escaping (Result<URLRequest, any Error>) -> Void) {
         
         var request = urlRequest
-        let key = "ab876a640563e8cd3a2254e9e522cd8dbde56213bdc0e68d92274a1a945b4c55"
+        //let key = "ab876a640563e8cd3a2254e9e522cd8dbde56213bdc0e68d92274a1a945b4c55"
+        let key = "945e5f0060ec476ef6fa117d6c191df272cc4596851725669d0c629e7af6ebc2"
             
         if let url = request.url,
            var components = URLComponents(url: url, resolvingAgainstBaseURL: false){

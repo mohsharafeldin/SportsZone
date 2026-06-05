@@ -25,31 +25,28 @@
                 <rect key="frame" x="0.0" y="0.0" width="411" height="164"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b2l-9I-1nT">
-                        <rect key="frame" x="136" y="36" width="175" height="27.333333333333329"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b2l-9I-1nT">
+                        <rect key="frame" x="120" y="36" width="283" height="27.333333333333329"/>
                         <fontDescription key="fontDescription" name="Nunito-Bold" family="Nunito" pointSize="20"/>
                         <color key="textColor" name="TextPrimary"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qb7-hB-blG">
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qb7-hB-blG">
                         <rect key="frame" x="14" y="19" width="90" height="90"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="90" id="qUH-ct-0sy"/>
+                            <constraint firstAttribute="height" constant="90" id="wfW-Se-yQh"/>
+                        </constraints>
                     </imageView>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ab3-rx-RBo">
-                        <rect key="frame" x="121" y="81" width="65" height="65"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Ab3-rx-RBo">
+                        <rect key="frame" x="121" y="91" width="65" height="65"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="65" id="GLx-QF-mZ2"/>
+                            <constraint firstAttribute="height" constant="65" id="f4R-5R-TDd"/>
+                        </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4ho-di-BBq">
-                        <rect key="frame" x="216" y="115" width="150" height="23.333333333333343"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <fontDescription key="fontDescription" name="Nunito-Regular" family="Nunito" pointSize="17"/>
-                        <color key="textColor" name="TextSecondry"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iZ2-YB-61w">
-                        <rect key="frame" x="331" y="65" width="50.666666666666686" height="34.333333333333343"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iZ2-YB-61w">
+                        <rect key="frame" x="331" y="68" width="50.666666666666686" height="34.333333333333343"/>
                         <color key="tintColor" name="TextPrimary"/>
                         <state key="normal" title="Button"/>
                         <buttonConfiguration key="configuration" style="plain" image="heart" catalog="system"/>
@@ -57,8 +54,31 @@
                             <action selector="addOrDeleteFavorite:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="Usu-90-5iv"/>
                         </connections>
                     </button>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4ho-di-BBq">
+                        <rect key="frame" x="197" y="112" width="197" height="23"/>
+                        <fontDescription key="fontDescription" name="Nunito-Regular" family="Nunito" pointSize="17"/>
+                        <color key="textColor" name="TextSecondry"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <color key="backgroundColor" name="Surface"/>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="4ho-di-BBq" secondAttribute="trailing" constant="17" id="0NR-Tu-CK0"/>
+                    <constraint firstItem="4ho-di-BBq" firstAttribute="leading" secondItem="Ab3-rx-RBo" secondAttribute="trailing" constant="11" id="4Ut-xP-Uls"/>
+                    <constraint firstItem="Ab3-rx-RBo" firstAttribute="leading" secondItem="qb7-hB-blG" secondAttribute="trailing" constant="17" id="4Wb-yb-q74"/>
+                    <constraint firstItem="b2l-9I-1nT" firstAttribute="leading" secondItem="qb7-hB-blG" secondAttribute="trailing" constant="16" id="Gkx-r8-pkH"/>
+                    <constraint firstItem="qb7-hB-blG" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="19" id="Kp0-G6-NUO"/>
+                    <constraint firstAttribute="bottom" secondItem="Ab3-rx-RBo" secondAttribute="bottom" constant="8" id="LlH-ch-U2q"/>
+                    <constraint firstAttribute="bottom" secondItem="4ho-di-BBq" secondAttribute="bottom" constant="29" id="QWC-VR-289"/>
+                    <constraint firstAttribute="trailing" secondItem="iZ2-YB-61w" secondAttribute="trailing" constant="29.329999999999998" id="T46-XS-yDp"/>
+                    <constraint firstItem="Ab3-rx-RBo" firstAttribute="top" secondItem="b2l-9I-1nT" secondAttribute="bottom" constant="27.670000000000002" id="YRA-4h-xh3"/>
+                    <constraint firstItem="b2l-9I-1nT" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="36" id="ZMD-Hp-oJO"/>
+                    <constraint firstItem="4ho-di-BBq" firstAttribute="top" secondItem="iZ2-YB-61w" secondAttribute="bottom" constant="9.6666666666666572" id="bCj-Py-Zon"/>
+                    <constraint firstItem="qb7-hB-blG" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="14" id="d57-HO-wEV"/>
+                    <constraint firstAttribute="bottom" secondItem="qb7-hB-blG" secondAttribute="bottom" constant="55" id="jm9-QC-99J"/>
+                    <constraint firstAttribute="trailing" secondItem="b2l-9I-1nT" secondAttribute="trailing" constant="8" id="m4v-hc-Ixs"/>
+                    <constraint firstItem="iZ2-YB-61w" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="68" id="who-m2-BWI"/>
+                </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>

@@ -9,13 +9,13 @@ import Foundation
 import Reachability
 
 class ReachabilityManager {
-    
+
     static let shared = ReachabilityManager()
-    
-    let reachability = try! Reachability()
-    
+
+    private init() {}
+
     func isConnected() -> Bool {
-        
-        return reachability.connection != .unavailable
+        let reachability = try? Reachability()
+        return reachability?.connection != .unavailable
     }
 }
