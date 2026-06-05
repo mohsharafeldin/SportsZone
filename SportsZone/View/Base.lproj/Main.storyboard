@@ -438,7 +438,7 @@ find your next challenge.</string>
         <scene sceneID="XaO-5l-2aB">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="uED-E9-mo3" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Favoirites" selectedImage="dash.png" id="eFS-2m-M87"/>
+                    <tabBarItem key="tabBarItem" title="Favoirites" image="heart" catalog="system" id="eFS-2m-M87"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="wDg-4L-mdy">
                         <rect key="frame" x="0.0" y="59" width="393" height="44"/>
@@ -457,7 +457,7 @@ find your next challenge.</string>
         <scene sceneID="mUE-Bs-p7z">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="hgZ-5W-LUG" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Leages" selectedImage="carat.png" id="M4a-Py-fdu"/>
+                    <tabBarItem key="tabBarItem" title="Leages" image="sportscourt" catalog="system" id="M4a-Py-fdu"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="fLb-84-QeQ">
                         <rect key="frame" x="0.0" y="59" width="393" height="44"/>
@@ -493,9 +493,9 @@ find your next challenge.</string>
         </scene>
     </scenes>
     <resources>
-        <image name="carat.png" width="16" height="28"/>
-        <image name="dash.png" width="32" height="32"/>
+        <image name="heart" catalog="system" width="128" height="107"/>
         <image name="logo" width="1400" height="1400"/>
+        <image name="sportscourt" catalog="system" width="128" height="83"/>
         <namedColor name="Accent">
             <color red="0.96078431372549022" green="0.61960784313725492" blue="0.043137254901960784" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
