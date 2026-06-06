@@ -194,10 +194,15 @@ class LeaguesDetailsCollectionViewController: UICollectionViewController {
             cell.config(league: leagueData!)
             cell.delegate = self
 
-            let isFav = FavouriteManager.shared.isFavourite(id: Int64(leagueID ?? "0") ?? 0)
-            cell.favBtn.setImage(UIImage(systemName: isFav ? "heart.fill" : "heart"), for: .normal)
+            let isFav = FavouriteManager.shared.isFavourite(
+                id: Int64(leagueID ?? "0") ?? 0
+            )
+            cell.favBtn.setImage(
+                UIImage(systemName: isFav ? "heart.fill" : "heart"),
+                for: .normal
+            )
             cell.favBtn.tintColor = isFav ? .systemRed : .lightGray
-            
+
             return cell
         case 1:
             if presenter.upcomingEvents.isEmpty {
@@ -332,7 +337,8 @@ class LeaguesDetailsCollectionViewController: UICollectionViewController {
         didSelectItemAt indexPath: IndexPath
     ) {
 
-        guard indexPath.section == 1 else { return }
+        guard indexPath.section == 2 else { return }
+        guard sport == .football else { return }
         guard !presenter.teams.isEmpty else { return }
 
         let selectedTeam = presenter.teams[indexPath.item]
