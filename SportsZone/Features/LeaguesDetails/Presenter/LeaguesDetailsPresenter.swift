@@ -21,6 +21,7 @@ class LeaguesDetailsPresenter {
     private(set) var upcomingEvents: [SportEvent] = []
     private(set) var latestEvents: [SportEvent]   = []
     private(set) var teams: [Team] = []
+    private(set) var tennisPlayers: [TennisPlayer] = []
     private(set) var isLoading = false
 
     init(repository: LeaguesRepoProtocol = LeaguesRepo()) {
@@ -54,18 +55,35 @@ class LeaguesDetailsPresenter {
         }
 
         group.enter()
-        repo.fetchTeams(sport: sport, leagueID: leagueID) {
-            [weak self] result in
+        if sport == .tennis{
+            repo.fetchTennisPlayers(leagueID: leagueID) {
+                [weak self] result in
 
-            defer { group.leave() }
-            switch result {
+                defer { group.leave() }
+                switch result {
 
-            case .success(let data):
-                print("Teams Count = \(data.count)")
-                self?.teams = data
+                case .success(let data):
+                    print("Teams Count = \(data.count)")
+                    self?.tennisPlayers = data
 
-            case .failure(let error):
-                self?.view?.showError(error.localizedDescription)
+                case .failure(let error):
+                    self?.view?.showError(error.localizedDescription)
+                }
+            }
+        }else{
+            repo.fetchTeams(sport: sport, leagueID: leagueID) {
+                [weak self] result in
+
+                defer { group.leave() }
+                switch result {
+
+                case .success(let data):
+                    print("Teams Count = \(data.count)")
+                    self?.teams = data
+
+                case .failure(let error):
+                    self?.view?.showError(error.localizedDescription)
+                }
             }
         }
 

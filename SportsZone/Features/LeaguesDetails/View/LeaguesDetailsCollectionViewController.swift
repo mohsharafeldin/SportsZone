@@ -25,6 +25,7 @@ class LeaguesDetailsCollectionViewController: UICollectionViewController {
 
         setupCollectionView()
         setupPresenter()
+        print ("sport type \(sport)")
     }
 
     private func setupPresenter() {
@@ -33,8 +34,8 @@ class LeaguesDetailsCollectionViewController: UICollectionViewController {
 
         let calendar = Calendar.current
         let today = Date()
-        let nextWeek = calendar.date(byAdding: .day, value: 300, to: today)!
-        let lastWeek = calendar.date(byAdding: .day, value: -300, to: today)!
+        let nextWeek = calendar.date(byAdding: .day, value: 400, to: today)!
+        let lastWeek = calendar.date(byAdding: .day, value: -400, to: today)!
 
         presenter.loadData(
             sport: sport,
@@ -96,9 +97,15 @@ class LeaguesDetailsCollectionViewController: UICollectionViewController {
                 : setupUpcomingEventsSection()
 
         case 1:
-            return presenter.teams.isEmpty
-                ? emptySectionLayout(height: 180)
-                : setupTeamsSection()
+            if sport == .tennis{
+                return presenter.tennisPlayers.isEmpty
+                    ? emptySectionLayout(height: 180)
+                    : setupTeamsSection()
+            }else{
+                return presenter.teams.isEmpty
+                    ? emptySectionLayout(height: 180)
+                    : setupTeamsSection()
+            }
 
         case 2:
             return presenter.latestEvents.isEmpty
@@ -120,7 +127,11 @@ class LeaguesDetailsCollectionViewController: UICollectionViewController {
     ) -> Int {
         switch section {
         case 0: return presenter.upcomingEvents.isEmpty ? 1 : presenter.upcomingEvents.count
-        case 1: return presenter.teams.isEmpty ? 1 : presenter.teams.count
+        case 1: if sport == .tennis {
+            return presenter.tennisPlayers.isEmpty ? 1 : presenter.tennisPlayers.count
+        } else {
+            return presenter.teams.isEmpty ? 1 : presenter.teams.count
+        }
         case 2: return presenter.latestEvents.isEmpty ? 1 : presenter.latestEvents.count
         default: return 0
         }
@@ -175,23 +186,43 @@ class LeaguesDetailsCollectionViewController: UICollectionViewController {
             }
 
         case 1:
-            if presenter.teams.isEmpty {
-                let cell =
-                    collectionView.dequeueReusableCell(
-                        withReuseIdentifier: emptyCellIdentifire,
-                        for: indexPath
-                    ) as! EmptyCollectionViewCell
 
-                cell.config("No Teams Found")
+            let isEmpty = sport == .tennis
+                ? presenter.tennisPlayers.isEmpty
+                : presenter.teams.isEmpty
+
+            if isEmpty {
+
+                let cell = collectionView.dequeueReusableCell(
+                    withReuseIdentifier: emptyCellIdentifire,
+                    for: indexPath
+                ) as! EmptyCollectionViewCell
+
+                cell.config(
+                    sport == .tennis
+                    ? "No Players Found"
+                    : "No Teams Found"
+                )
+
                 return cell
-            } else {
-                let cell =
-                    collectionView.dequeueReusableCell(
-                        withReuseIdentifier: teamsIdentifier,
-                        for: indexPath
-                    ) as! TeamsCollectionViewCell
 
-                cell.config(team: presenter.teams[indexPath.item])
+            } else {
+
+                let cell = collectionView.dequeueReusableCell(
+                    withReuseIdentifier: teamsIdentifier,
+                    for: indexPath
+                ) as! TeamsCollectionViewCell
+
+                if sport == .tennis {
+                    cell.config(
+                        tennisPlayer: presenter.tennisPlayers[indexPath.item]
+                    )
+                } else {
+                    cell.config(
+                        team: presenter.teams[indexPath.item]
+                    )
+                }
+
                 return cell
             }
 
@@ -243,8 +274,11 @@ class LeaguesDetailsCollectionViewController: UICollectionViewController {
         switch indexPath.section {
         case 0:
             header.cofig(header: "Upcoming Events")
-        case 1:
+        case 1: if sport == .tennis{
+            header.cofig(header: "Players")
+        }else{
             header.cofig(header: "Teams")
+        }
         case 2:
             header.cofig(header: "Latest Events")
         default:
@@ -371,7 +405,7 @@ extension LeaguesDetailsCollectionViewController {
         //group
         let groupSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1),
-            heightDimension: .absolute(230)
+            heightDimension: .absolute(250)
         )
         let eventsGroup = NSCollectionLayoutGroup.vertical(
             layoutSize: groupSize,
@@ -450,7 +484,7 @@ extension LeaguesDetailsCollectionViewController: LeaguesDetailsViewProtocol {
             self.collectionView.showAnimatedGradientSkeleton(
                 usingGradient: SkeletonGradient(
                     baseColor: .systemGray5,
-                    secondaryColor: .lightGray
+                    secondaryColor: .systemGray4
                 ),
                 animation: nil,
                 transition: .crossDissolve(0.25)

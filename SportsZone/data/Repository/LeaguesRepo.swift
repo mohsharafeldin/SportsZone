@@ -20,6 +20,11 @@ protocol LeaguesRepoProtocol {
         completion: @escaping (Result<[Team], Error>) -> Void
     )
 
+    func fetchTennisPlayers(
+        leagueID: String,
+        completion: @escaping (Result<[TennisPlayer], Error>) -> Void
+    )
+    
     func fetchLeagues(
         sport: SportType,
         completion: @escaping (Result<[League], Error>) -> Void
@@ -76,6 +81,26 @@ class LeaguesRepo: LeaguesRepoProtocol {
             switch result {
             case .success(let data): completion(.success(data.result ?? []))
             case .failure(let error): completion(.failure(error))
+            }
+        }
+    }
+    
+    func fetchTennisPlayers(
+        leagueID: String,
+        completion: @escaping (Result<[TennisPlayer], Error>) -> Void
+    ) {
+        let params: [String: String] = [
+            "met": ApiConstants.players,
+            "leagueId": leagueID,
+        ]
+
+        network.request(sport: .tennis, paremeters: params) {
+            (result: Result<TennisPlayersResponse, Error>) in
+            switch result {
+            case .success(let data):
+                completion(.success(data.result ?? []))
+            case .failure(let error):
+                completion(.failure(error))
             }
         }
     }

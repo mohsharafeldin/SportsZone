@@ -90,6 +90,7 @@
 		D5E6AD7B2FD454B50004F3F1 /* BasketballEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5E6AD7A2FD454AE0004F3F1 /* BasketballEvent.swift */; };
 		D5E6AD7D2FD454E50004F3F1 /* CricketEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5E6AD7C2FD454DF0004F3F1 /* CricketEvent.swift */; };
 		D5E6AD7F2FD455120004F3F1 /* TennisEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5E6AD7E2FD4550C0004F3F1 /* TennisEvent.swift */; };
+		D5E6AD812FD46DA90004F3F1 /* TennisPlayers.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5E6AD802FD46D9B0004F3F1 /* TennisPlayers.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -189,6 +190,7 @@
 		D5E6AD7A2FD454AE0004F3F1 /* BasketballEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasketballEvent.swift; sourceTree = "<group>"; };
 		D5E6AD7C2FD454DF0004F3F1 /* CricketEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CricketEvent.swift; sourceTree = "<group>"; };
 		D5E6AD7E2FD4550C0004F3F1 /* TennisEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TennisEvent.swift; sourceTree = "<group>"; };
+		D5E6AD802FD46D9B0004F3F1 /* TennisPlayers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TennisPlayers.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -768,6 +770,7 @@
 		D5E6AD772FD454790004F3F1 /* Tennis */ = {
 			isa = PBXGroup;
 			children = (
+				D5E6AD802FD46D9B0004F3F1 /* TennisPlayers.swift */,
 				D5E6AD7E2FD4550C0004F3F1 /* TennisEvent.swift */,
 			);
 			path = Tennis;
@@ -968,6 +971,7 @@
 				D58DBF352FC3972B000F4C1A /* LeaguesRepo.swift in Sources */,
 				D58DBF362FC3972B000F4C1A /* SportEvent.swift in Sources */,
 				5A9543342FBC874B00571374 /* SportsZone.xcdatamodeld in Sources */,
+				D5E6AD812FD46DA90004F3F1 /* TennisPlayers.swift in Sources */,
 				5A952A682FCF1D5700D5D8CC /* ReachabilityManager.swift in Sources */,
 				5A4FF2AA2FC179FF00CB7BD4 /* FavouriteLeaguesViewController.swift in Sources */,
 				5A952A5E2FCF146400D5D8CC /* LeaguesPresenter.swift in Sources */,

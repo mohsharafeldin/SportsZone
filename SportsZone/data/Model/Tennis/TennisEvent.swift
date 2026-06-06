@@ -19,8 +19,16 @@ struct TennisEvent: Decodable, SportEvent {
     let eventStatus: String?
 
     // Protocol computed properties
-    var homeTeamName: String? { firstPlayer }
-    var awayTeamName: String? { secondPlayer }
+    var homeTeamName: String? {
+        firstPlayer?.components(separatedBy: "/")
+            .joined(separator: " ")
+            .trimmingCharacters(in: .whitespaces) ?? ""
+    }
+    var awayTeamName: String? {
+        secondPlayer?.components(separatedBy: "/")
+            .joined(separator: " ")
+            .trimmingCharacters(in: .whitespaces) ?? ""
+    }
     var homeTeamLogo: String? { firstPlayerLogo }
     var awayTeamLogo: String? { secondPlayerLogo }
 

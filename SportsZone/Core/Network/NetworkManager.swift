@@ -34,13 +34,13 @@ class NetworkManager : NetworkManagerProtocol{
             .validate()
             .responseDecodable(of: T.self) { response in
                 if let data = response.data {
-                    print("🔴 RAW JSON:\n\(String(data: data, encoding: .utf8) ?? "nil")")
+                    //print("🔴 RAW JSON:\n\(String(data: data, encoding: .utf8) ?? "nil")")
                 }
                 
                 switch response.result {
                 case .success(let data): completion(.success(data))
                 case .failure(let error):
-                    print("🔴 DECODE ERROR: \(error)")  
+                    //print("🔴 DECODE ERROR: \(error)")
                     completion(.failure(error))
                 }
             }

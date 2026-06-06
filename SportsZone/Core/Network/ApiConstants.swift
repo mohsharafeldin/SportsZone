@@ -9,6 +9,7 @@ enum ApiConstants{
     static let events = "Fixtures"
     static let teams = "Teams"
     static let leagues = "Leagues"
+    static let players = "Players"
 }
 
 enum SportType: String, CaseIterable{
