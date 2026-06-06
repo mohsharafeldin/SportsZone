@@ -91,6 +91,7 @@
 		D5E6AD7D2FD454E50004F3F1 /* CricketEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5E6AD7C2FD454DF0004F3F1 /* CricketEvent.swift */; };
 		D5E6AD7F2FD455120004F3F1 /* TennisEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5E6AD7E2FD4550C0004F3F1 /* TennisEvent.swift */; };
 		D5E6AD812FD46DA90004F3F1 /* TennisPlayers.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5E6AD802FD46D9B0004F3F1 /* TennisPlayers.swift */; };
+		D5E6AD832FD483A60004F3F1 /* LeagueInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5E6AD822FD483A60004F3F1 /* LeagueInfoCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -191,6 +192,7 @@
 		D5E6AD7C2FD454DF0004F3F1 /* CricketEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CricketEvent.swift; sourceTree = "<group>"; };
 		D5E6AD7E2FD4550C0004F3F1 /* TennisEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TennisEvent.swift; sourceTree = "<group>"; };
 		D5E6AD802FD46D9B0004F3F1 /* TennisPlayers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TennisPlayers.swift; sourceTree = "<group>"; };
+		D5E6AD822FD483A60004F3F1 /* LeagueInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeagueInfoCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -730,6 +732,7 @@
 				D58DBF452FC397A8000F4C1A /* ReusableViews */,
 				D58DBF462FC397A8000F4C1A /* LeaguesDetailsCollectionViewController.swift */,
 				D58DBF472FC397A8000F4C1A /* TeamsCollectionViewCell.swift */,
+				D5E6AD822FD483A60004F3F1 /* LeagueInfoCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -937,6 +940,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5A95432A2FBC874B00571374 /* AppDelegate.swift in Sources */,
+				D5E6AD832FD483A60004F3F1 /* LeagueInfoCell.swift in Sources */,
 				D57124302FBE1E710091FB75 /* AppColors.swift in Sources */,
 				D58DBF3D2FC39740000F4C1A /* ApiConstants.swift in Sources */,
 				D5E6AD792FD4548B0004F3F1 /* FootballEvent.swift in Sources */,

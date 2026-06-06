@@ -8,6 +8,7 @@
 import SkeletonView
 import UIKit
 
+private let leagueInfoIdentifire = "LeagueInfoCell"
 private let eventsIdentifier = "EventCellId"
 private let teamsIdentifier = "TeamsCell"
 private let headerIdentifire = "HeaderViewItem"
@@ -16,16 +17,19 @@ private let emptyCellIdentifire = "EmptyCollectionCell"
 class LeaguesDetailsCollectionViewController: UICollectionViewController {
 
     var sport: SportType = .football
-    var leagueID: String = "207"
+    var leagueData: League?
+    var leagueID: String?
 
     private var presenter: LeaguesDetailsPresenter!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        leagueID = String(leagueData?.leagueKey ?? 0)
+        
         setupCollectionView()
         setupPresenter()
-        print ("sport type \(sport)")
+        print("sport type \(sport)")
     }
 
     private func setupPresenter() {
@@ -39,7 +43,7 @@ class LeaguesDetailsCollectionViewController: UICollectionViewController {
 
         presenter.loadData(
             sport: sport,
-            leagueID: leagueID,
+            leagueID: leagueID ?? "0",
             from: formattedDate(lastWeek),
             to: formattedDate(nextWeek)
         )
@@ -81,33 +85,35 @@ class LeaguesDetailsCollectionViewController: UICollectionViewController {
     private func createSection(for section: Int) -> NSCollectionLayoutSection {
 
         if presenter.isLoading {
-                switch section {
-                case 0: return setupUpcomingEventsSection()
-                case 1: return setupTeamsSection()
-                case 2: return setupLastEventsSection()
-                default: return emptySectionLayout(height: 220)
-                }
+            switch section {
+            case 0: return setupLeagueInfoSection()
+            case 1: return setupUpcomingEventsSection()
+            case 2: return setupTeamsSection()
+            case 3: return setupLastEventsSection()
+            default: return emptySectionLayout(height: 220)
             }
-        
-        switch section {
+        }
 
-        case 0:
+        switch section {
+        case 0: return setupLeagueInfoSection()
+
+        case 1:
             return presenter.upcomingEvents.isEmpty
                 ? emptySectionLayout(height: 220)
                 : setupUpcomingEventsSection()
 
-        case 1:
-            if sport == .tennis{
+        case 2:
+            if sport == .tennis {
                 return presenter.tennisPlayers.isEmpty
                     ? emptySectionLayout(height: 180)
                     : setupTeamsSection()
-            }else{
+            } else {
                 return presenter.teams.isEmpty
                     ? emptySectionLayout(height: 180)
                     : setupTeamsSection()
             }
 
-        case 2:
+        case 3:
             return presenter.latestEvents.isEmpty
                 ? emptySectionLayout(height: 250)
                 : setupLastEventsSection()
@@ -118,7 +124,7 @@ class LeaguesDetailsCollectionViewController: UICollectionViewController {
     }
 
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 3
+        return 4
     }
 
     override func collectionView(
@@ -126,13 +132,20 @@ class LeaguesDetailsCollectionViewController: UICollectionViewController {
         numberOfItemsInSection section: Int
     ) -> Int {
         switch section {
-        case 0: return presenter.upcomingEvents.isEmpty ? 1 : presenter.upcomingEvents.count
-        case 1: if sport == .tennis {
-            return presenter.tennisPlayers.isEmpty ? 1 : presenter.tennisPlayers.count
-        } else {
-            return presenter.teams.isEmpty ? 1 : presenter.teams.count
-        }
-        case 2: return presenter.latestEvents.isEmpty ? 1 : presenter.latestEvents.count
+        case 0: return 1
+        case 1:
+            return presenter.upcomingEvents.isEmpty
+                ? 1 : presenter.upcomingEvents.count
+        case 2:
+            if sport == .tennis {
+                return presenter.tennisPlayers.isEmpty
+                    ? 1 : presenter.tennisPlayers.count
+            } else {
+                return presenter.teams.isEmpty ? 1 : presenter.teams.count
+            }
+        case 3:
+            return presenter.latestEvents.isEmpty
+                ? 1 : presenter.latestEvents.count
         default: return 0
         }
     }
@@ -144,14 +157,21 @@ class LeaguesDetailsCollectionViewController: UICollectionViewController {
 
         if presenter.isLoading {
             switch indexPath.section {
-            case 0, 2:
+            case 0:
+                let cell =
+                    collectionView.dequeueReusableCell(
+                        withReuseIdentifier: leagueInfoIdentifire,
+                        for: indexPath
+                    ) as! LeagueInfoCell
+                return cell
+            case 1, 3:
                 let cell =
                     collectionView.dequeueReusableCell(
                         withReuseIdentifier: eventsIdentifier,
                         for: indexPath
                     ) as! EventCell
                 return cell
-            case 1:
+            case 2:
                 let cell =
                     collectionView.dequeueReusableCell(
                         withReuseIdentifier: teamsIdentifier,
@@ -165,6 +185,15 @@ class LeaguesDetailsCollectionViewController: UICollectionViewController {
 
         switch indexPath.section {
         case 0:
+            let cell =
+                collectionView.dequeueReusableCell(
+                    withReuseIdentifier: leagueInfoIdentifire,
+                    for: indexPath
+                ) as! LeagueInfoCell
+
+            cell.config(league: leagueData!)
+            return cell
+        case 1:
             if presenter.upcomingEvents.isEmpty {
                 let cell =
                     collectionView.dequeueReusableCell(
@@ -185,33 +214,36 @@ class LeaguesDetailsCollectionViewController: UICollectionViewController {
                 return cell
             }
 
-        case 1:
+        case 2:
 
-            let isEmpty = sport == .tennis
+            let isEmpty =
+                sport == .tennis
                 ? presenter.tennisPlayers.isEmpty
                 : presenter.teams.isEmpty
 
             if isEmpty {
 
-                let cell = collectionView.dequeueReusableCell(
-                    withReuseIdentifier: emptyCellIdentifire,
-                    for: indexPath
-                ) as! EmptyCollectionViewCell
+                let cell =
+                    collectionView.dequeueReusableCell(
+                        withReuseIdentifier: emptyCellIdentifire,
+                        for: indexPath
+                    ) as! EmptyCollectionViewCell
 
                 cell.config(
                     sport == .tennis
-                    ? "No Players Found"
-                    : "No Teams Found"
+                        ? "No Players Found"
+                        : "No Teams Found"
                 )
 
                 return cell
 
             } else {
 
-                let cell = collectionView.dequeueReusableCell(
-                    withReuseIdentifier: teamsIdentifier,
-                    for: indexPath
-                ) as! TeamsCollectionViewCell
+                let cell =
+                    collectionView.dequeueReusableCell(
+                        withReuseIdentifier: teamsIdentifier,
+                        for: indexPath
+                    ) as! TeamsCollectionViewCell
 
                 if sport == .tennis {
                     cell.config(
@@ -226,7 +258,7 @@ class LeaguesDetailsCollectionViewController: UICollectionViewController {
                 return cell
             }
 
-        case 2:
+        case 3:
             if presenter.latestEvents.isEmpty {
                 let cell =
                     collectionView.dequeueReusableCell(
@@ -272,14 +304,15 @@ class LeaguesDetailsCollectionViewController: UICollectionViewController {
             ) as! HeaderView
 
         switch indexPath.section {
-        case 0:
+        case 1:
             header.cofig(header: "Upcoming Events")
-        case 1: if sport == .tennis{
-            header.cofig(header: "Players")
-        }else{
-            header.cofig(header: "Teams")
-        }
         case 2:
+            if sport == .tennis {
+                header.cofig(header: "Players")
+            } else {
+                header.cofig(header: "Teams")
+            }
+        case 3:
             header.cofig(header: "Latest Events")
         default:
             break
@@ -287,26 +320,73 @@ class LeaguesDetailsCollectionViewController: UICollectionViewController {
 
         return header
     }
-    
-    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
-        guard indexPath.section == 1 else {return}
-        guard !presenter.teams.isEmpty else {return}
-        
+
+    override func collectionView(
+        _ collectionView: UICollectionView,
+        didSelectItemAt indexPath: IndexPath
+    ) {
+
+        guard indexPath.section == 1 else { return }
+        guard !presenter.teams.isEmpty else { return }
+
         let selectedTeam = presenter.teams[indexPath.item]
-        
+
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let teamsDetailesVC = storyboard.instantiateViewController(withIdentifier: "TeamDetailsScreen") as! TeamDetailesViewController
-        
+        let teamsDetailesVC =
+            storyboard.instantiateViewController(
+                withIdentifier: "TeamDetailsScreen"
+            ) as! TeamDetailesViewController
+
         teamsDetailesVC.sport = self.sport
         teamsDetailesVC.teamId = String(selectedTeam.teamKey)
-        
-        navigationController?.pushViewController(teamsDetailesVC, animated: true)
-        
+
+        navigationController?.pushViewController(
+            teamsDetailesVC,
+            animated: true
+        )
+
     }
 }
 
 extension LeaguesDetailsCollectionViewController {
+    func setupLeagueInfoSection() -> NSCollectionLayoutSection {
+        //item
+        let itemSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1),
+            heightDimension: .fractionalHeight(1)
+        )
+
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        item.contentInsets = NSDirectionalEdgeInsets(
+            top: 0,
+            leading: 8,
+            bottom: 0,
+            trailing: 8
+        )
+
+        //group
+        let groupSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1),
+            heightDimension: .absolute(100)
+        )
+
+        let group = NSCollectionLayoutGroup.horizontal(
+            layoutSize: groupSize,
+            subitems: [item]
+        )
+
+        //section
+        let section = NSCollectionLayoutSection(group: group)
+        section.contentInsets = NSDirectionalEdgeInsets(
+            top: 8,
+            leading: 16,
+            bottom: 16,
+            trailing: 16
+        )
+
+        return section
+    }
+
     func setupUpcomingEventsSection() -> NSCollectionLayoutSection {
 
         //item
@@ -503,7 +583,8 @@ extension LeaguesDetailsCollectionViewController: LeaguesDetailsViewProtocol {
     func reloadData() {
         DispatchQueue.main.async {
             self.collectionView.setCollectionViewLayout(
-                self.createLayout(),animated: false
+                self.createLayout(),
+                animated: false
             )
             self.collectionView.reloadData()
         }
@@ -528,20 +609,24 @@ extension LeaguesDetailsCollectionViewController:
         cellIdentifierForItemAt indexPath: IndexPath
     ) -> SkeletonView.ReusableCellIdentifier {
         switch indexPath.section {
-        case 0, 2: return eventsIdentifier
-        case 1: return teamsIdentifier
+        case 0: return leagueInfoIdentifire
+        case 1, 3: return eventsIdentifier
+        case 2: return teamsIdentifier
         default: return eventsIdentifier
         }
     }
 
     func numSections(in collectionSkeletonView: UICollectionView) -> Int {
-            return 3
-        }
-    
+        return 4
+    }
+
     func collectionSkeletonView(
         _ skeletonView: UICollectionView,
         numberOfItemsInSection section: Int
     ) -> Int {
-        return 5
+        switch section {
+        case 0: return 1
+        default: return 5
+        }
     }
 }

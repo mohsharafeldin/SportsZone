@@ -217,8 +217,24 @@ UITableViewDataSource {
         storyboard.instantiateViewController(
             withIdentifier:
             "LeagueDetailsViewController"
+        ) as! LeaguesDetailsCollectionViewController
+
+        if let sportString = presenter.filteredLeagues[indexPath.item].sportType,
+           let sport = SportType(rawValue: sportString) {
+            detailsVC.sport = sport
+        }
+        
+        let data = presenter.filteredLeagues[indexPath.item]
+        let league: League = League(
+            leagueKey: Int(data.leagueID),
+            leagueName: data.leagueName,
+            countryName: data.countryName,
+            leagueLogo: data.leagueLogo?.base64EncodedString(),
+            countryLogo: data.countryLogo?.base64EncodedString()
         )
 
+        detailsVC.leagueData = league
+        
         navigationController?.pushViewController(
             detailsVC,
             animated: true

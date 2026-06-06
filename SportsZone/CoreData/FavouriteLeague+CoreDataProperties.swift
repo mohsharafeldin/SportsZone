@@ -21,6 +21,7 @@ extension FavouriteLeague {
     @NSManaged public var leagueID: Int64
     @NSManaged public var leagueLogo: Data?
     @NSManaged public var leagueName: String?
+    @NSManaged public var sportType: String?
 
 }
 

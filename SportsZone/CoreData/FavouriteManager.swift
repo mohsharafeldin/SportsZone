@@ -24,7 +24,8 @@ class FavouriteManager : FavouriteManagerProtocol {
     func saveLeague(
         league: League,
         leagueImage: Data?,
-        countryImage: Data?
+        countryImage: Data?,
+        sport: SportType
     ) {
         
         let leagueID =
@@ -53,6 +54,8 @@ class FavouriteManager : FavouriteManagerProtocol {
         
         fav.countryLogo =
         countryImage
+    
+        fav.sportType = sport.rawValue
         
         do {
             

@@ -326,11 +326,9 @@ UITableViewDataSource {
         detailsVC.sport =
         selectedSport ?? .football
 
-        let leagueId =
-        presenter.filteredLeagues[indexPath.row].leagueKey ?? 0
+        let league: League = presenter.filteredLeagues[indexPath.row]
 
-        detailsVC.leagueID =
-        String(leagueId)
+        detailsVC.leagueData = league
 
         navigationController?.pushViewController(
             detailsVC,
@@ -468,7 +466,8 @@ LeagueCellDelegate {
             FavouriteManager.shared.saveLeague(
                 league: league,
                 leagueImage: leagueImageData,
-                countryImage: countryImageData
+                countryImage: countryImageData,
+                sport: selectedSport ?? .football
             )
             
             cell.favouriteButton.setImage(
