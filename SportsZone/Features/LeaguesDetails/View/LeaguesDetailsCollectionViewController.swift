@@ -33,8 +33,8 @@ class LeaguesDetailsCollectionViewController: UICollectionViewController {
 
         let calendar = Calendar.current
         let today = Date()
-        let nextWeek = calendar.date(byAdding: .day, value: 7, to: today)!
-        let lastWeek = calendar.date(byAdding: .day, value: -7, to: today)!
+        let nextWeek = calendar.date(byAdding: .day, value: 300, to: today)!
+        let lastWeek = calendar.date(byAdding: .day, value: -300, to: today)!
 
         presenter.loadData(
             sport: sport,

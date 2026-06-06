@@ -30,7 +30,7 @@ class TeamsCollectionViewCell: UICollectionViewCell {
     func config(team: Team){
         teamName.text = team.teamName
         teamImage.sd_setImage(
-            with: URL(string: team.teamLogo),
+            with: URL(string: team.teamLogo ?? ""),
             placeholderImage: UIImage(named: "logo.png")
         )
     }

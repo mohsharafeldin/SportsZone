@@ -110,7 +110,7 @@ extension TeamDetailesViewController: TeamDetailsViewProtocol {
             self.teamNumOfPlayersLabel.text =
                 "Players: \(data?.players?.count ?? 0)"
             self.teamLogo.sd_setImage(
-                with: URL(string: data!.teamLogo),
+                with: URL(string: data?.teamLogo ?? ""),
                 placeholderImage: UIImage(systemName: "logo.png")
             )
             self.playersTableView.reloadData()

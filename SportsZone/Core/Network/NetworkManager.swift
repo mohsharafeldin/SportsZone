@@ -32,10 +32,16 @@ class NetworkManager : NetworkManagerProtocol{
     ){
         session.request(sport.baseUrl, parameters: paremeters)
             .validate()
-            .responseDecodable(of: T.self){ response in
-                switch response.result{
+            .responseDecodable(of: T.self) { response in
+                if let data = response.data {
+                    print("🔴 RAW JSON:\n\(String(data: data, encoding: .utf8) ?? "nil")")
+                }
+                
+                switch response.result {
                 case .success(let data): completion(.success(data))
-                case .failure(let error): completion(.failure(error))
+                case .failure(let error):
+                    print("🔴 DECODE ERROR: \(error)")  
+                    completion(.failure(error))
                 }
             }
     }

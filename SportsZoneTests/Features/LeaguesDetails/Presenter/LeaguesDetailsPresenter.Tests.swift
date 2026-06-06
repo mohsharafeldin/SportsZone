@@ -25,7 +25,7 @@ private func makeEvent(
     dateString: String,
     team1: String = "Home FC",
     team2: String = "Away FC"
-) -> Event {
+) -> SportEvent {
     let json = """
     {
         "event_key": \(key),
@@ -41,7 +41,7 @@ private func makeEvent(
         "event_status": null
     }
     """
-    return try! JSONDecoder().decode(Event.self, from: json.data(using: .utf8)!)
+    return try! JSONDecoder().decode(SportEvent.self, from: json.data(using: .utf8)!)
 }
 
 // Build a dummy Team

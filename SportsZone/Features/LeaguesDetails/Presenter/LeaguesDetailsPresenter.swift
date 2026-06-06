@@ -18,8 +18,8 @@ class LeaguesDetailsPresenter {
     weak var view: LeaguesDetailsViewProtocol?
     private let repo: LeaguesRepoProtocol
 
-    private(set) var upcomingEvents: [Event] = []
-    private(set) var latestEvents: [Event]   = []
+    private(set) var upcomingEvents: [SportEvent] = []
+    private(set) var latestEvents: [SportEvent]   = []
     private(set) var teams: [Team] = []
     private(set) var isLoading = false
 
