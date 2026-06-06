@@ -211,7 +211,7 @@ final class LeaguesRepoTests: XCTestCase {
     func test_fetchEvents_success_returnsEvents() {
         // Given
         let events = [
-            Event(
+            SportEvent(
                 eventKey: 1,
                 eventDate: "2024-01-20",
                 eventTime: "20:00",
@@ -225,10 +225,10 @@ final class LeaguesRepoTests: XCTestCase {
                 eventStatus: "Finished"
             )
         ]
-        mockNetwork.resultToReturn = EventResponse(success: 1, result: events)
+        mockNetwork.resultToReturn = SportEventResponse(success: 1, result: events)
 
         // When
-        var receivedEvents: [Event]?
+        var receivedEvents: [SportEvent]?
         repo.fetchEvents(
             sport: .football,
             leagueID: "152",
@@ -246,10 +246,10 @@ final class LeaguesRepoTests: XCTestCase {
 
     func test_fetchEvents_success_nilResult_returnsEmptyArray() {
         // Given
-        mockNetwork.resultToReturn = EventResponse(success: 1, result: nil)
+        mockNetwork.resultToReturn = SportEventResponse(success: 1, result: nil)
 
         // When
-        var receivedEvents: [Event]?
+        var receivedEvents: [SportEvent]?
         repo.fetchEvents(
             sport: .football,
             leagueID: "152",
@@ -286,7 +286,7 @@ final class LeaguesRepoTests: XCTestCase {
     func test_fetchEvents_multipleEvents_allReturned() {
         // Given
         let events = (1...5).map { i in
-            Event(
+            SportEvent(
                 eventKey: i,
                 eventDate: "2024-01-\(i + 10)",
                 eventTime: "18:00",
@@ -300,10 +300,10 @@ final class LeaguesRepoTests: XCTestCase {
                 eventStatus: "NS"
             )
         }
-        mockNetwork.resultToReturn = EventResponse(success: 1, result: events)
+        mockNetwork.resultToReturn = SportEventResponse(success: 1, result: events)
 
         // When
-        var receivedEvents: [Event]?
+        var receivedEvents: [SportEvent]?
         repo.fetchEvents(
             sport: .football,
             leagueID: "152",
@@ -320,7 +320,7 @@ final class LeaguesRepoTests: XCTestCase {
     func test_fetchEvents_eventWithNilOptionalFields() {
         // Give
         let events = [
-            Event(
+            SportEvent(
                 eventKey: 99,
                 eventDate: "2024-06-01",
                 eventTime: "21:00",
@@ -334,10 +334,10 @@ final class LeaguesRepoTests: XCTestCase {
                 eventStatus: "NS"
             )
         ]
-        mockNetwork.resultToReturn = EventResponse(success: 1, result: events)
+        mockNetwork.resultToReturn = SportEventResponse(success: 1, result: events)
 
         // When
-        var receivedEvents: [Event]?
+        var receivedEvents: [SportEvent]?
         repo.fetchEvents(
             sport: .football,
             leagueID: "152",

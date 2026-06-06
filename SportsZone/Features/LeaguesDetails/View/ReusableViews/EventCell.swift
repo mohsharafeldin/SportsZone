@@ -71,26 +71,26 @@ class EventCell: UICollectionViewCell {
         layer.masksToBounds = false
     }
 
-    func config(event: Event) {
+    func config(event: SportEvent) {
         tittleLabel.text = event.leagueName
         statusLabel.text = event.eventStatus ?? ""
-        team1Label.text = event.team1Name
-        team2Label.text = event.team2Name
+        team1Label.text = event.homeTeamName
+        team2Label.text = event.awayTeamName
         scoreLabel.text =
-            (event.eventFinalResult == nil || event.eventFinalResult == ""
-                || event.eventFinalResult == "-")
+            (event.finalResult == nil || event.finalResult == ""
+                || event.finalResult == "-")
             ? "VS"
-            : event.eventFinalResult!
+            : event.finalResult!
         timeLabel.text = event.leagueRound ?? ""
         dateLabel.text = "\(event.eventTime) | \(event.eventDate)"
 
         team1Image.sd_setImage(
-            with: URL(string: event.team1Logo!),
+            with: URL(string: event.homeTeamLogo ?? ""),
             placeholderImage: UIImage(named: "logo.png")
         )
 
         team2Image.sd_setImage(
-            with: URL(string: event.team2Logo!),
+            with: URL(string: event.awayTeamLogo ?? ""),
             placeholderImage: UIImage(named: "logo.png")
         )
     }

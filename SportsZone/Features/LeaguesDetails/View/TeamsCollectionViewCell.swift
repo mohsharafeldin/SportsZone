@@ -27,10 +27,10 @@ class TeamsCollectionViewCell: UICollectionViewCell {
         hideSkeleton()
     }
     
-    func config(team: Team){
-        teamName.text = team.teamName
+    func config(team: Team? = nil, tennisPlayer: TennisPlayer? = nil){
+        teamName.text = team?.teamName ?? tennisPlayer?.cleanedPlayerName
         teamImage.sd_setImage(
-            with: URL(string: team.teamLogo),
+            with: URL(string: (team?.teamLogo ?? tennisPlayer?.playerLogo) ?? ""),
             placeholderImage: UIImage(named: "logo.png")
         )
     }

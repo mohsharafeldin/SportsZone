@@ -23,7 +23,7 @@ final class MockLeaguesRepo: LeaguesRepoProtocol {
 
     // MARK: Events
 
-    var eventsResult: Result<[Event], Error>?
+    var eventsResult: Result<[SportEvent], Error>?
 
     var fetchEventsCalled = false
 
@@ -58,7 +58,7 @@ final class MockLeaguesRepo: LeaguesRepoProtocol {
         leagueID: String,
         from: String,
         to: String,
-        completion: @escaping (Result<[Event], Error>) -> Void
+        completion: @escaping (Result<[SportEvent], Error>) -> Void
     ) {
 
         fetchEventsCalled = true

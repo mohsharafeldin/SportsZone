@@ -6,7 +6,7 @@
 //
 
 struct Player: Decodable {
-    let playerKey: Int?
+    let playerKey: Int
     let playerImage: String?
     let playerName: String?
     let playerNumber: String?
