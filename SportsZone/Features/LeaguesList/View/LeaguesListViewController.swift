@@ -466,7 +466,8 @@ LeagueCellDelegate {
             FavouriteManager.shared.saveLeague(
                 league: league,
                 leagueImage: leagueImageData,
-                countryImage: countryImageData
+                countryImage: countryImageData,
+                sport: selectedSport ?? .football
             )
             
             cell.favouriteButton.setImage(
