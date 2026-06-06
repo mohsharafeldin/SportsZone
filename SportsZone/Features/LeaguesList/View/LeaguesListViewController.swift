@@ -46,7 +46,11 @@ class LeaguesListViewController: UIViewController {
         
         title = "Leagues"
         
-        presenter = LeaguesPresenter(view: self)
+        presenter = LeaguesPresenter(
+            view: self,
+            repo: LeaguesRepo(),
+            reachability: ReachabilityManager.shared
+        )
         
         setupTableView()
         
@@ -289,8 +293,7 @@ UITableViewDataSource {
         didSelectRowAt indexPath: IndexPath
     ) {
 
-        guard ReachabilityManager.shared.isConnected()
-        else {
+        guard presenter.canOpenLeagueDetails() else {
 
             let alert = UIAlertController(
                 title: "No Internet Connection",

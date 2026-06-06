@@ -7,8 +7,6 @@
 
 import UIKit
 
-import UIKit
-
 class FavouriteLeaguesViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
@@ -31,7 +29,10 @@ class FavouriteLeaguesViewController: UIViewController {
 
         title = "Favourite Leagues"
 
-        presenter = FavouriteLeaguesPresenter(view: self)
+        presenter = FavouriteLeaguesPresenter(
+            view: self,
+            favouriteManager: FavouriteManager.shared
+        )
 
         setupTableView()
 

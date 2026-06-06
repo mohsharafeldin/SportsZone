@@ -8,7 +8,12 @@
 import Foundation
 import Reachability
 
-class ReachabilityManager {
+protocol ReachabilityProtocol {
+    func isConnected() -> Bool
+}
+
+
+class ReachabilityManager: ReachabilityProtocol {
 
     static let shared = ReachabilityManager()
 

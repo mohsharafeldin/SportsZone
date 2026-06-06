@@ -427,7 +427,7 @@ find your next challenge.</string>
                     </view>
                     <navigationItem key="navigationItem" id="3y1-hb-1Rk"/>
                     <connections>
-                        <outlet property="tableView" destination="yfg-fW-VP1" id="JAY-WC-oZM"/>
+                        <outlet property="tableView" destination="yfg-fW-VP1" id="RZb-IX-iT3"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bl8-1W-Xx9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

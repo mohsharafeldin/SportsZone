@@ -18,7 +18,10 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        presenter = HomePresenter(view: self)
+        presenter = HomePresenter(
+            view: self,
+            reachability: ReachabilityManager.shared
+        )
         
         setupCollectionView()
         
