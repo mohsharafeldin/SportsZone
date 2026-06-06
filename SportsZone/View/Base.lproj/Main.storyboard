@@ -133,7 +133,7 @@
                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
                                                     </userDefinedRuntimeAttributes>
                                                     <connections>
-                                                        <action selector="favButton:" destination="29N-e6-F5I" eventType="touchUpInside" id="qAs-a1-XxE"/>
+                                                        <action selector="didFavSelected:" destination="29N-e6-F5I" eventType="touchUpInside" id="qAs-a1-XxE"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
@@ -163,6 +163,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
+                                    <outlet property="favBtn" destination="6EF-Qk-onr" id="RNc-ST-AMN"/>
                                     <outlet property="leagueLogo" destination="d86-S1-fFT" id="jZr-1E-0A2"/>
                                     <outlet property="leagueNameLable" destination="YOY-v7-sVp" id="ABy-XS-yGK"/>
                                 </connections>

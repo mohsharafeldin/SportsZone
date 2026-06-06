@@ -11,6 +11,9 @@ class LeagueInfoCell: UICollectionViewCell {
     
     @IBOutlet weak var leagueNameLable: UILabel!
     @IBOutlet weak var leagueLogo: UIImageView!
+    @IBOutlet weak var favBtn: UIButton!
+    
+    weak var delegate : FavDelegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -42,8 +45,8 @@ class LeagueInfoCell: UICollectionViewCell {
         )
     }
     
-    @IBAction func favButton(_ sender: UIButton) {
-        
+    @IBAction func didFavSelected(_ sender: UIButton) {
+        delegate?.didTapFavourite(at: self)
     }
     
     private func setupUI(){

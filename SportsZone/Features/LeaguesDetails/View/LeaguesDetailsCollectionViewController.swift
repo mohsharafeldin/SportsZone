@@ -24,9 +24,9 @@ class LeaguesDetailsCollectionViewController: UICollectionViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         leagueID = String(leagueData?.leagueKey ?? 0)
-        
+
         setupCollectionView()
         setupPresenter()
         print("sport type \(sport)")
@@ -192,6 +192,17 @@ class LeaguesDetailsCollectionViewController: UICollectionViewController {
                 ) as! LeagueInfoCell
 
             cell.config(league: leagueData!)
+            cell.delegate = self
+
+            let isFav = FavouriteManager.shared.isFavourite(
+                id: Int64(leagueID ?? "0") ?? 0
+            )
+            cell.favBtn.setImage(
+                UIImage(systemName: isFav ? "heart.fill" : "heart"),
+                for: .normal
+            )
+            cell.favBtn.tintColor = isFav ? .systemRed : .lightGray
+
             return cell
         case 1:
             if presenter.upcomingEvents.isEmpty {
@@ -326,7 +337,8 @@ class LeaguesDetailsCollectionViewController: UICollectionViewController {
         didSelectItemAt indexPath: IndexPath
     ) {
 
-        guard indexPath.section == 1 else { return }
+        guard indexPath.section == 2 else { return }
+        guard sport == .football else { return }
         guard !presenter.teams.isEmpty else { return }
 
         let selectedTeam = presenter.teams[indexPath.item]
@@ -627,6 +639,74 @@ extension LeaguesDetailsCollectionViewController:
         switch section {
         case 0: return 1
         default: return 5
+        }
+    }
+}
+
+extension LeaguesDetailsCollectionViewController: FavDelegate {
+    func didTapFavourite(at cell: LeagueInfoCell) {
+        let isFavourite = FavouriteManager.shared.isFavourite(
+            id: Int64(leagueID ?? "0") ?? 0
+        )
+
+        if isFavourite {
+
+            let alert = UIAlertController(
+                title: "Remove Favourite",
+                message: "Remove this league from favourites?",
+                preferredStyle: .alert
+            )
+
+            alert.addAction(
+                UIAlertAction(
+                    title: "Cancel",
+                    style: .cancel
+                )
+            )
+
+            alert.addAction(
+                UIAlertAction(
+                    title: "Remove",
+                    style: .destructive
+                ) { _ in
+
+                    FavouriteManager.shared.deleteLeague(
+                        id: Int64(self.leagueID ?? "0") ?? 0
+                    )
+
+                    cell.favBtn.setImage(
+                        UIImage(systemName: "heart"),
+                        for: .normal
+                    )
+
+                    cell.favBtn.tintColor =
+                        .lightGray
+                }
+            )
+
+            present(alert, animated: true)
+            return
+
+        } else {
+            let leagueImageData = cell.leagueLogo.image?
+                .jpegData(
+                    compressionQuality: 0.8
+                )
+
+            FavouriteManager.shared.saveLeague(
+                league: self.leagueData!,
+                leagueImage: leagueImageData,
+                countryImage: nil,
+                sport: self.sport
+            )
+
+            cell.favBtn.setImage(
+                UIImage(systemName: "heart.fill"),
+                for: .normal
+            )
+
+            cell.favBtn.tintColor =
+                .systemRed
         }
     }
 }
