@@ -10,7 +10,12 @@ import Foundation
 import UIKit
 import CoreData
 
-class FavouriteManager {
+protocol FavouriteManagerProtocol {
+    func fetchFavourites() -> [FavouriteLeague]
+    func deleteLeague(id: Int64)
+}
+
+class FavouriteManager : FavouriteManagerProtocol {
     
     static let shared = FavouriteManager()
     

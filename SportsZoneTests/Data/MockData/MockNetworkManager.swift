@@ -6,7 +6,7 @@
 //
 
 import XCTest
-@testable import SportsZone 
+@testable import SportsZone
 
 // MARK: - Mock
 final class MockNetworkManager: NetworkManagerProtocol {

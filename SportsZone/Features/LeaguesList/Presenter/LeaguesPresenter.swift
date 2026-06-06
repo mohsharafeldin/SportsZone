@@ -8,7 +8,15 @@
 
 import Foundation
 
-class LeaguesPresenter {
+protocol LeaguesViewProtocol: AnyObject {
+    
+    func renderLeagues()
+
+        func renderError(message: String)
+
+}
+
+class LeaguesPresenter  {
     
     weak var view: LeaguesViewProtocol?
     
@@ -17,13 +25,20 @@ class LeaguesPresenter {
     var leagues: [League] = []
     
     var filteredLeagues: [League] = []
+    private let reachability: ReachabilityProtocol
     
-    init(view: LeaguesViewProtocol,
-         repo: LeaguesRepoProtocol = LeaguesRepo()) {
-        
-        self.view = view
-        self.repo = repo
-    }
+    init(
+            view: LeaguesViewProtocol,
+            repo: LeaguesRepoProtocol,
+            reachability: ReachabilityProtocol
+        ) {
+            self.view = view
+            self.repo = repo
+            self.reachability = reachability
+        }
+    func canOpenLeagueDetails() -> Bool {
+            reachability.isConnected()
+        }
     
     func getLeagues(for sport: SportType) {
         
