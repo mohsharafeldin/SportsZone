@@ -401,6 +401,49 @@
             </objects>
             <point key="canvasLocation" x="4338.1679389312976" y="-1102.1126760563382"/>
         </scene>
+        <!--Splash View Controller-->
+        <scene sceneID="Pg3-c8-UzP">
+            <objects>
+                <viewController storyboardIdentifier="SplashViewController" id="Qry-FC-flq" customClass="SplashViewController" customModule="SportsZone" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="J6f-dU-Dow">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="center" spacing="32" translatesAutoresizingMaskIntoConstraints="NO" id="fTR-VN-0dz">
+                                <rect key="frame" x="96.666666666666686" y="320.66666666666663" width="200" height="260.66666666666663"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="jmu-v9-45w">
+                                        <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="200" id="TOk-E9-7yt"/>
+                                            <constraint firstAttribute="height" constant="200" id="Voi-LG-C3B"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SportsZone" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PGg-vn-HTd">
+                                        <rect key="frame" x="33.999999999999986" y="231.99999999999994" width="132" height="28.666666666666686"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
+                                        <color key="textColor" name="Surface"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="mgH-Gs-Rb0"/>
+                        <color key="backgroundColor" name="PrimaryColor"/>
+                        <constraints>
+                            <constraint firstItem="fTR-VN-0dz" firstAttribute="centerX" secondItem="mgH-Gs-Rb0" secondAttribute="centerX" id="HLb-wm-yAq"/>
+                            <constraint firstItem="fTR-VN-0dz" firstAttribute="centerY" secondItem="mgH-Gs-Rb0" secondAttribute="centerY" id="esg-88-paH"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="appNameLable" destination="PGg-vn-HTd" id="Me8-b7-wjT"/>
+                        <outlet property="logoImage" destination="jmu-v9-45w" id="yJI-Z6-fUk"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xhI-f2-CXQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5393" y="-1102"/>
+        </scene>
         <!--Home View Controller-->
         <scene sceneID="ZkQ-hS-p2B">
             <objects>

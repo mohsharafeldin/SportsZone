@@ -18,17 +18,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let hasSeenOnboarding = UserDefaults.standard.bool(forKey: "hasSeenOnboarding")
-        
-        let rootVC: UIViewController
-        if hasSeenOnboarding {
-            rootVC = storyboard.instantiateViewController(withIdentifier: "MainTabBarController")
-        } else {
-            rootVC = storyboard.instantiateViewController(withIdentifier: "OnboardingContainerViewController")
-        }
+        let splashVC = storyboard.instantiateViewController(withIdentifier: "SplashViewController")
         
         window = UIWindow(windowScene: windowScene)
-        window?.rootViewController = rootVC
+        window?.rootViewController = splashVC
         window?.makeKeyAndVisible()
     }
 
